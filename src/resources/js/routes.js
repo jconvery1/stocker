@@ -1,16 +1,31 @@
-import Home from './components/Home.vue';
-import About from './components/About.vue';
+import Dashboard from './components/Dashboard.vue';
+import Stock from './components/Stock.vue';
+import Orders from "./components/Orders.vue";
+import Sales from "./components/Sales.vue";
+import Deliveries from "./components/Deliveries.vue";
 
 export default {
-    mode: 'history',
+    mode: "history",
     routes: [
         {
-            path: '/',
-            component: Home
+            path: "/",
+            component: Dashboard,
         },
         {
-            path: '/about',
-            component: About
-        }
-    ]
+            path: "/stock",
+            component: Stock,
+        },
+        {
+            path: "/orders",
+            component: Orders,
+        },
+        {
+            path: "/sales",
+            component: Sales,
+        },
+        {
+            path: "/deliveries",
+            component: Deliveries,
+        },
+    ],
 };
