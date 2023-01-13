@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/stockitems', 'StockItemController@index');
+Route::get('/users', 'UserController@index');
+
 Route::get('/{any?}', function () {
     return view('app');
 });
