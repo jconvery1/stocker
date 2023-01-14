@@ -193,13 +193,13 @@ var render = function render() {
   return _c("div", [_c("div", {
     staticClass: "relative overflow-x-auto"
   }, [_c("table", {
-    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    staticClass: "w-full text-sm text-left text-gray-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.deliveries, function (delivery) {
     return _c("tr", {
       key: delivery.id,
-      staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      staticClass: "bg-white border-b hover:bg-gray-50"
     }, [_c("td", {
-      staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+      staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
     }, [_vm._v("\n                      " + _vm._s(delivery.user_id) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
     }, [_vm._v("\n                      " + _vm._s(delivery.delivery_datetime) + "\n                  ")]), _vm._v(" "), _c("td", {
@@ -213,7 +213,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    staticClass: "text-xs text-gray-700 uppercase bg-gray-50"
   }, [_c("tr", [_c("th", {
     staticClass: "px-6 py-3",
     attrs: {
@@ -259,13 +259,13 @@ var render = function render() {
   return _c("div", [_c("div", {
     staticClass: "relative overflow-x-auto"
   }, [_c("table", {
-    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    staticClass: "w-full text-sm text-left text-gray-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.orders, function (order) {
     return _c("tr", {
       key: order.id,
-      staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      staticClass: "bg-white border-b hover:bg-gray-50"
     }, [_c("td", {
-      staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+      staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
     }, [_vm._v("\n                      " + _vm._s(order.order_datetime) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
     }, [_vm._v("\n                      " + _vm._s(order.notes) + "\n                  ")]), _vm._v(" "), _c("td", {
@@ -281,7 +281,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    staticClass: "text-xs text-gray-700 uppercase bg-gray-50"
   }, [_c("tr", [_c("th", {
     staticClass: "px-6 py-3",
     attrs: {
@@ -332,13 +332,13 @@ var render = function render() {
   return _c("div", [_c("div", {
     staticClass: "relative overflow-x-auto"
   }, [_c("table", {
-    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    staticClass: "w-full text-sm text-left text-gray-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.sales, function (sale) {
     return _c("tr", {
       key: sale.id,
-      staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      staticClass: "bg-white border-b hover:bg-gray-50"
     }, [_c("td", {
-      staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+      staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
     }, [_vm._v("\n                      " + _vm._s(sale.customer_id) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
     }, [_vm._v("\n                      " + _vm._s(sale.sale_price) + "\n                  ")]), _vm._v(" "), _c("td", {
@@ -352,7 +352,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    staticClass: "text-xs text-gray-700 uppercase bg-gray-50"
   }, [_c("tr", [_c("th", {
     staticClass: "px-6 py-3",
     attrs: {
