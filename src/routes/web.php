@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/deliveries', 'DeliveryController@index');
+Route::get('/sales', 'SaleController@index');
+Route::get('/orders', 'OrderController@index');
 Route::get('/stockitems', 'StockItemController@index');
 Route::get('/users', 'UserController@index');
 

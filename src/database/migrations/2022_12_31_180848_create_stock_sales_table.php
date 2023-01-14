@@ -31,12 +31,6 @@ class CreateStockSalesTable extends Migration
                 ->references('id')
                 ->on('orders');
         });
-
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('delivery_id')
-                ->references('id')
-                ->on('deliveries');
-        });
     }
 
     /**

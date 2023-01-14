@@ -27,7 +27,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      deliveries: null
+    };
+  },
+  mounted: function mounted() {
+    this.getDeliveries();
+  },
+  methods: {
+    getDeliveries: function getDeliveries() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("http://127.0.0.1:8080/api/deliveries").then(function (response) {
+        _this.deliveries = response.data.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -42,7 +61,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      orders: null
+    };
+  },
+  mounted: function mounted() {
+    this.getOrders();
+  },
+  methods: {
+    getOrders: function getOrders() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("http://127.0.0.1:8080/api/orders").then(function (response) {
+        _this.orders = response.data.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -57,7 +95,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      sales: null
+    };
+  },
+  mounted: function mounted() {
+    this.getSales();
+  },
+  methods: {
+    getSales: function getSales() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("http://127.0.0.1:8080/api/sales").then(function (response) {
+        _this.sales = response.data.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -133,9 +190,54 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("p", [_vm._v("Deliveries Content")]);
+  return _c("div", {
+    staticClass: "mt-12"
+  }, [_c("div", {
+    staticClass: "relative overflow-x-auto"
+  }, [_c("table", {
+    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.deliveries, function (delivery) {
+    return _c("tr", {
+      key: delivery.id,
+      staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    }, [_c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(delivery.user_id) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(delivery.delivery_datetime) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(delivery.order_id) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(delivery.created_at) + "\n                  ")])]);
+  }), 0)])])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", {
+    staticClass: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+  }, [_c("tr", [_c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      UserID\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Delivery DateTime\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      OrderID\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Created At\n                  ")])])]);
+}];
 render._withStripped = true;
 
 
@@ -156,9 +258,61 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("p", [_vm._v("Orders Content")]);
+  return _c("div", {
+    staticClass: "mt-12"
+  }, [_c("div", {
+    staticClass: "relative overflow-x-auto"
+  }, [_c("table", {
+    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.orders, function (order) {
+    return _c("tr", {
+      key: order.id,
+      staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    }, [_c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(order.order_datetime) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(order.notes) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(order.user_id) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(order.supplier_id) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(order.created_at) + "\n                  ")])]);
+  }), 0)])])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", {
+    staticClass: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+  }, [_c("tr", [_c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Order DateTime\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Notes\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      UserID\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      SupplierID\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Created At\n                  ")])])]);
+}];
 render._withStripped = true;
 
 
@@ -179,9 +333,54 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("p", [_vm._v("Sales Content")]);
+  return _c("div", {
+    staticClass: "mt-12"
+  }, [_c("div", {
+    staticClass: "relative overflow-x-auto"
+  }, [_c("table", {
+    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.sales, function (sale) {
+    return _c("tr", {
+      key: sale.id,
+      staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    }, [_c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(sale.customer_id) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(sale.sale_price) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(sale.user_id) + "\n                  ")]), _vm._v(" "), _c("td", {
+      staticClass: "px-6 py-4"
+    }, [_vm._v("\n                      " + _vm._s(sale.created_at) + "\n                  ")])]);
+  }), 0)])])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", {
+    staticClass: "text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+  }, [_c("tr", [_c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      CustomerID\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Sale Price\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      UserID\n                  ")]), _vm._v(" "), _c("th", {
+    staticClass: "px-6 py-3",
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("\n                      Created At\n                  ")])])]);
+}];
 render._withStripped = true;
 
 
@@ -203,6 +402,8 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
+    staticClass: "mt-12"
+  }, [_c("div", {
     staticClass: "relative overflow-x-auto"
   }, [_c("table", {
     staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
@@ -212,18 +413,18 @@ var render = function render() {
       staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
     }, [_c("td", {
       staticClass: "px-6 py-4"
-    }, [_vm._v("\n                    " + _vm._s(stockItem.name) + "\n                ")]), _vm._v(" "), _c("td", {
+    }, [_vm._v("\n                      " + _vm._s(stockItem.name) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
-    }, [_vm._v("\n                    " + _vm._s(stockItem.supplier_id) + "\n                ")]), _vm._v(" "), _c("td", {
+    }, [_vm._v("\n                      " + _vm._s(stockItem.supplier_id) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
-    }, [_vm._v("\n                    " + _vm._s(stockItem.image) + "\n                ")]), _vm._v(" "), _c("td", {
+    }, [_vm._v("\n                      " + _vm._s(stockItem.image) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
-    }, [_vm._v("\n                    " + _vm._s(stockItem.shoe_size) + "\n                ")]), _vm._v(" "), _c("td", {
+    }, [_vm._v("\n                      " + _vm._s(stockItem.shoe_size) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
-    }, [_vm._v("\n                    " + _vm._s(stockItem.material) + "\n                ")]), _vm._v(" "), _c("td", {
+    }, [_vm._v("\n                      " + _vm._s(stockItem.material) + "\n                  ")]), _vm._v(" "), _c("td", {
       staticClass: "px-6 py-4"
-    }, [_vm._v("\n                    " + _vm._s(stockItem.category) + "\n                ")])]);
-  }), 0)])]);
+    }, [_vm._v("\n                      " + _vm._s(stockItem.category) + "\n                  ")])]);
+  }), 0)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -235,32 +436,32 @@ var staticRenderFns = [function () {
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                    Name\n                ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("\n                      Name\n                  ")]), _vm._v(" "), _c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                    SupplierID\n                ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("\n                      SupplierID\n                  ")]), _vm._v(" "), _c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                    Image\n                ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("\n                      Image\n                  ")]), _vm._v(" "), _c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                    Shoe Size\n                ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("\n                      Shoe Size\n                  ")]), _vm._v(" "), _c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                    Material\n                ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("\n                      Material\n                  ")]), _vm._v(" "), _c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                    Category\n                ")])])]);
+  }, [_vm._v("\n                      Category\n                  ")])])]);
 }];
 render._withStripped = true;
 
@@ -275,17 +476,19 @@ render._withStripped = true;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue/dist/vue.js */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue/dist/vue.js */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/app.css */ "./resources/css/app.css");
 
 
 
-vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1___default().use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
-var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_1___default())({
+
+vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
+var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   el: '#app',
-  router: new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"](_routes__WEBPACK_IMPORTED_MODULE_0__["default"])
+  router: new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"](_routes__WEBPACK_IMPORTED_MODULE_0__["default"])
 });
 
 /***/ }),

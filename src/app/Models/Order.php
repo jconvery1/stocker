@@ -10,6 +10,21 @@ class Order extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'order_datetime',
+        'notes',
+        'user_id',
+        'supplier_id',
+        'delivery_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
      * Get the delivery associated with the order.
      */
     public function delivery()

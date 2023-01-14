@@ -27,7 +27,7 @@
                         </ul>
                     </div>
                 </aside>
-                <div class="primary flex-1">
+                <div>
                     <router-view></router-view>
                 </div>
             </main>

@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockItemController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\StockOrderController;
+use App\Http\Controllers\StockSaleController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('users', UserController::class);
-Route::apiResource('customers', UserController::class);
-Route::apiResource('deliveries', UserController::class);
-Route::apiResource('orders', UserController::class);
-Route::apiResource('sales', UserController::class);
+Route::apiResource('customers', CustomerController::class);
+Route::apiResource('deliveries', DeliveryController::class);
+Route::apiResource('orders', OrderController::class);
+Route::apiResource('sales', SaleController::class);
 Route::apiResource('stockitems', StockItemController::class);
-Route::apiResource('stockorders', UserController::class);
-Route::apiResource('stocksales', UserController::class);
-Route::apiResource('suppliers', UserController::class);
+Route::apiResource('stockorders', StockOrderController::class);
+Route::apiResource('stocksales', StockSaleController::class);
+Route::apiResource('suppliers', SupplierController::class);
