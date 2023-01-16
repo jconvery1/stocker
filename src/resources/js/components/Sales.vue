@@ -1,8 +1,17 @@
 <template>
 <div>
+    <div class="flex justify-between m-2 p-2">
+        <span class="self-center text-xl font-semibold whitespace-nowrap">Sale Collection</span>
+        <router-link
+            :to="{path: '/sales/add'}"
+            class="px-4 py-2 bg-blue-500 hover:bg-blue-600 sm:rounded-lg text-white"
+        >
+            Add Sale
+        </router-link>
+    </div>
   <div class="relative overflow-x-auto">
       <table class="w-full text-sm text-left text-gray-500">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <thead class="text-xs text-gray-700 uppercase bg-blue-50">
               <tr>
                   <th scope="col" class="px-6 py-3">
                       CustomerID
