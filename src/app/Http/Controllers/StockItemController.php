@@ -30,8 +30,10 @@ class StockItemController extends Controller
         return response()->json("stock item updated");
     }
 
-    public function destroy(StockItem $stockItem)
+    public function destroy(StoreStockItemRequest $request)
     {
+        $id = $request->get('id');
+        $stockItem = new StockItem(['id' => $id]);
         $stockItem->delete();
         return response()->json("stock item deleted");
     }

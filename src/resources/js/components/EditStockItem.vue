@@ -4,13 +4,6 @@
         <span class="self-center text-xl font-semibold whitespace-nowrap">
             Add Stock Item
         </span>
-        <button
-            @click="$router.push({path: '/stock'})"
-            type="submit"
-            class="text-white bg-slate-500 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-        >
-            Cancel
-        </button>
     </div>
   <div class="relative overflow-x-auto m-2 p-2">
     <form>
@@ -81,7 +74,7 @@
         </div>
         <div class="flex justify-end pr-4">
             <button
-                @click="addStockItem"
+                @click="editStockItem"
                 type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >
@@ -96,15 +89,32 @@
 <script>
 import axios from 'axios';
 export default {
+    props: {
+        id: {
+            type: Number
+        }
+    },
     data() {
         return {
             stockItem: {}
         }
     },
+    mounted() {
+        console.log(this.$route.params);
+        console.log(this.$route.params.id);
+        // this.id = this.$route.params.id;
+        this.getStockItem(this.$route.params.id);
+    },
     methods: {
-        addStockItem() {
+        getStockItem(id) {
+            axios.get("http://127.0.0.1:8080/api/stockitems/" + id)
+                .then((response) => {
+                    this.stockItem = response.data.data;
+                });
+        },
+        editStockItem() {
             try {
-            axios.post("http://127.0.0.1:8080/api/stockitems", this.stockItem).then(
+            axios.put("http://127.0.0.1:8080/api/stockitems/" + id, this.stockItem).then(
                 this.$router.push({path: '/stock'})
             );
             } catch (error) {
@@ -112,6 +122,17 @@ export default {
                 errors.value = error.response.data.errors;
             }
             }
+
+//   const updateSkill = async (id) => {
+//     try {
+//       await axios.put("skills/" + id, skill.value);
+//       await router.push({ name: "SkillIndex" });
+//     } catch (error) {
+//       if (error.response.status === 422) {
+//         errors.value = error.response.data.errors;
+//       }
+//     }
+//   };
         }
     }
 }

@@ -1,58 +1,102 @@
 <template>
 <div>
-  <div class="relative overflow-x-auto">
-      <table class="w-full text-sm text-left text-gray-500">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                  <th scope="col" class="px-6 py-3">
-                      Name
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      SupplierID
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Image
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Shoe Size
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Material
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Category
-                  </th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr v-for="stockItem in stockItems" :key="stockItem.id" class="bg-white border-b hover:bg-gray-50">
-                  <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                      {{ stockItem.name }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ stockItem.supplier_id }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ stockItem.image }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ stockItem.shoe_size }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ stockItem.material }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ stockItem.category }}
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+    <div class="flex justify-between m-2 p-2">
+        <span class="self-center text-xl font-semibold whitespace-nowrap">Stock Collection</span>
+        <router-link
+            :to="{path: '/stock/add'}"
+            class="px-4 py-2 bg-blue-500 hover:bg-blue-600 sm:rounded-lg text-white"
+        >
+            Add Stock Item
+        </router-link>
+    </div>
+    <div class="relative overflow-x-auto">
+        <table v-if="this.stockItems !== null" class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        SupplierID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Image
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Shoe Size
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Material
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Category
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="stockItem in stockItems" :key="stockItem.id" class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{ stockItem.name }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.supplier_id }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.image }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.shoe_size }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.material }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.category }}
+                    </td>
+                    <td class="py-4 px-6 space-x-2">
+                    <RouterLink
+                        :to="{ name: 'EditStockItem', params: { id: stockItem.id } }"
+                        class="
+                        px-4
+                        py-2
+                        bg-blue-500
+                        hover:bg-blue-600
+                        text-white
+                        rounded
+                        "
+                        >Edit</RouterLink
+                    >
+                    <button
+                    @click="deleteStockItem(stockItem)"
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
+                    </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-else class="grid min-h-screen place-content-center">
+            <div class="flex items-center gap-2 text-gray-500">
+            <span class="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
+            loading...
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+
 
 export default {
     data() {
@@ -69,6 +113,12 @@ export default {
                 .then((response) => {
                     this.stockItems = response.data.data;
                 });
+        },
+        deleteStockItem(stockItem) {
+            if (!window.confirm("Are You Sure?")) {
+                return;
+            }
+            axios.delete("http://127.0.0.1:8080/api/stockitems/" + stockItem.id, stockItem);
         }
     }
 }

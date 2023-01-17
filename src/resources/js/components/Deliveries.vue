@@ -9,42 +9,75 @@
             Add Delivery
         </router-link>
     </div>
-  <div class="relative overflow-x-auto">
-      <table class="w-full text-sm text-left text-gray-500">
-          <thead class="text-xs text-gray-700 uppercase bg-blue-50">
-              <tr>
-                  <th scope="col" class="px-6 py-3">
-                      UserID
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Delivery DateTime
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      OrderID
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Created At
-                  </th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr v-for="delivery in deliveries" :key="delivery.id" class="bg-white border-b hover:bg-gray-50">
-                  <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                      {{ delivery.user_id }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ delivery.delivery_datetime }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ delivery.order_id }}
-                  </td>
-                  <td class="px-6 py-4">
-                      {{ delivery.created_at }}
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+    <div class="relative overflow-x-auto">
+        <table v-if="this.deliveries !== null" class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        UserID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Delivery DateTime
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        OrderID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Created At
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="delivery in deliveries" :key="delivery.id" class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{ delivery.user_id }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ delivery.delivery_datetime }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ delivery.order_id }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ delivery.created_at }}
+                    </td>
+                    <td class="py-4 px-6 space-x-2">
+                    <RouterLink
+                        :to="{ name: 'EditDelivery', params: { id: delivery.id } }"
+                        class="
+                        px-4
+                        py-2
+                        bg-blue-500
+                        hover:bg-blue-600
+                        text-white
+                        rounded
+                        "
+                        >Edit</RouterLink
+                    >
+                    <button
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
+                    </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-else class="grid min-h-screen place-content-center">
+            <div class="flex items-center gap-2 text-gray-500">
+            <span class="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
+            loading...
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
