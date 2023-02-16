@@ -10,7 +10,11 @@
         </router-link>
     </div>
     <div class="relative overflow-x-auto">
-        <table v-if="this.stockItems !== null" class="w-full text-sm text-left text-gray-500">
+        <table
+            id="tableId"
+            v-if="this.stockItems !== null"
+            class="w-full text-sm text-left text-gray-500"
+        >
             <thead class="text-xs text-gray-700 uppercase bg-blue-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -36,7 +40,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="stockItem in stockItems" :key="stockItem.id" class="bg-white border-b hover:bg-gray-50">
+                <tr
+                    v-for="stockItem in stockItems"
+                    :key="stockItem.id"
+                    class="bg-white border-b hover:bg-gray-50"
+                >
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ stockItem.name }}
                     </td>
@@ -97,11 +105,11 @@
 <script>
 import axios from 'axios';
 
-
 export default {
     data() {
         return {
-            stockItems: null
+            stockItems: null,
+            tableId: 1
         }
     },
     mounted() {
@@ -112,6 +120,7 @@ export default {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
                     this.stockItems = response.data.data;
+                    this.tableId++;
                 });
         },
         deleteStockItem(stockItem) {
