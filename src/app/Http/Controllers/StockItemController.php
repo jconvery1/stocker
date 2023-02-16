@@ -13,9 +13,9 @@ class StockItemController extends Controller
         return StockItemResource::collection(StockItem::all());
     }
 
-    public function show(StockItem $stockItem)
+    public function show(StockItem $stockitem)
     {
-        return new StockItemResource($stockItem);
+        return new StockItemResource($stockitem);
     }
 
     public function store(StoreStockItemRequest $request)
