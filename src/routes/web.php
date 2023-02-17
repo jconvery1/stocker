@@ -13,16 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/deliveries', 'App\Http\Controllers\DeliveryController@index');
-Route::get('/sales', 'App\Http\Controllers\SaleController@index');
-Route::get('/orders', 'App\Http\Controllers\OrderController@index');
-// Route::get('/stockitems/{stockitem}', 'App\Http\Controllers\StockItemController@show');
-Route::get('/stockitems', 'App\Http\Controllers\StockItemController@index');
-Route::post('/stockitems', 'App\Http\Controllers\StockItemController@store');
-Route::put('/stockitems/:id', 'App\Http\Controllers\StockItemController@update');
-Route::delete('/stockitems/{stockitem}', 'App\Http\Controllers\StockItemController@destroy');
-Route::get('/users', 'App\Http\Controllers\UserController@index');
-
 Route::get('/{any?}', function () {
     return view('app');
 });

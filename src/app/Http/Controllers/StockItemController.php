@@ -24,17 +24,15 @@ class StockItemController extends Controller
         return response()->json("stock item created!");
     }
 
-    public function update(StoreStockItemRequest $request, StockItem $stockItem)
+    public function update(StoreStockItemRequest $request, StockItem $stockitem)
     {
-        $stockItem->update($request->validated());
+        $stockitem->update($request->validated());
         return response()->json("stock item updated");
     }
 
-    public function destroy(StoreStockItemRequest $request)
+    public function destroy(StockItem $stockitem)
     {
-        $id = $request->get('id');
-        $stockItem = new StockItem(['id' => $id]);
-        $stockItem->delete();
+        $stockitem->delete();
         return response()->json("stock item deleted");
     }
 }

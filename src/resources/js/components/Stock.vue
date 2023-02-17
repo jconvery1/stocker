@@ -123,11 +123,13 @@ export default {
                     this.tableId++;
                 });
         },
-        deleteStockItem(stockItem) {
+        async deleteStockItem(stockItem) {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            axios.delete("http://127.0.0.1:8080/api/stockitems/" + stockItem.id, stockItem);
+            await axios.delete("http://127.0.0.1:8080/api/stockitems/" + stockItem.id);
+            this.stockItems = null;
+            this.getStockItems();
         }
     }
 }

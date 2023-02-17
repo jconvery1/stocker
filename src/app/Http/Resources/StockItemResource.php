@@ -14,6 +14,16 @@ class StockItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'supplier_id' => $this->supplier_id,
+            'image' => $this->image,
+            'shoe_size' => $this->shoe_size,
+            'material' => $this->material,
+            'category' => $this->category,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
+        ];
     }
 }
