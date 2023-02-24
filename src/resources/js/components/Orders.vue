@@ -63,6 +63,7 @@
                         >Edit</RouterLink
                     >
                     <button
+                    @click="deleteOrder(order)"
                         class="
                             px-4
                             py-2
@@ -105,6 +106,14 @@ export default {
                 .then((response) => {
                     this.orders = response.data.data;
                 });
+        },
+        async deleteOrder(order) {
+            if (!window.confirm("Are You Sure?")) {
+                return;
+            }
+            await axios.delete("http://127.0.0.1:8080/api/orders/" + order.id);
+            this.orders = null;
+            this.getOrders();
         }
     }
 }

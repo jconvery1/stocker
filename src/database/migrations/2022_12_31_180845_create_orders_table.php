@@ -15,8 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id('id');
-            $table->dateTime('order_datetime');
-            $table->string('notes');
+            $table->dateTime('order_datetime')->nullable();
+            $table->string('notes')->nullable();
             $table->foreignId('user_id')
                 ->references('id')
                 ->on('users');

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class StockOrderResource extends JsonResource
 {
@@ -14,6 +15,13 @@ class StockOrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'order_id' => $this->order_id,
+            'stock_item_id' => $this->stock_item_id,
+            'quantity' => $this->quantity,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
+        ];
     }
 }

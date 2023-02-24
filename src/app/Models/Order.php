@@ -19,7 +19,6 @@ class Order extends Model
         'notes',
         'user_id',
         'supplier_id',
-        'delivery_id',
         'created_at',
         'updated_at'
     ];

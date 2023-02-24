@@ -17,7 +17,8 @@ class CreateStockSalesTable extends Migration
             $table->id('id');
             $table->foreignId('sale_id')
                 ->references('id')
-                ->on('sales');
+                ->on('sales')
+                ->onDelete('cascade');
             $table->foreignId('stock_item_id')
                 ->references('id')
                 ->on('stock_items');
