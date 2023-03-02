@@ -57,6 +57,7 @@
                         >Edit</RouterLink
                     >
                     <button
+                        @click="deleteDelivery(delivery)"
                         class="
                             px-4
                             py-2
@@ -99,6 +100,14 @@ export default {
                 .then((response) => {
                     this.deliveries = response.data.data;
                 });
+        },
+        async deleteDelivery(delivery) {
+            if (!window.confirm("Are You Sure?")) {
+                return;
+            }
+            await axios.delete("http://127.0.0.1:8080/api/deliveries/" + delivery.id);
+            this.deliveries = null;
+            this.getDeliveries();
         }
     }
 }

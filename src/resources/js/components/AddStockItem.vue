@@ -13,10 +13,11 @@
         </button>
     </div>
   <div class="relative overflow-x-auto m-2 p-2">
-    <form>
-        <div class="mb-6">
-            <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+    <form v-if="this.suppliers !== null">
+        <div class="flex mb-12">
+            <label
+                for="name"
+                class="block mr-2 w-32 text-sm font-medium text-gray-900"
             >
                 Name
             </label>
@@ -28,35 +29,37 @@
                 required
             >
         </div>
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mr-2 w-32 text-sm font-medium text-gray-900"
             >
                 Supplier
             </label>
-            <input
-                v-model="stockItem.supplier_id"
-                type="text"
-                id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
-            required>
+            <!-- Dropdown menu -->
+            <select v-model="stockItem.supplier_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5">
+                <option disabled value="">Please select one</option>
+                <option :key="supplier.id" v-for="supplier in suppliers" :value="supplier.id">
+                    {{ supplier.name }}
+                </option>
+            </select>
         </div>
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mr-2 w-32 text-sm font-medium text-gray-900"
             >
                 Shoe Size
             </label>
             <input
                 v-model="stockItem.shoe_size"
-                type="text"
+                type="number"
+                min="1"
                 id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/12 p-2.5"
             required>
         </div>
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mr-2 w-32 text-sm font-medium text-gray-900"
             >
                 Material
             </label>
@@ -64,12 +67,12 @@
                 v-model="stockItem.material"
                 type="text"
                 id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5"
             required>
         </div>
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block mr-2 w-32 text-sm font-medium text-gray-900"
             >
                 Category
             </label>
@@ -77,7 +80,7 @@
                 v-model="stockItem.category"
                 type="text"
                 id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5"
             required>
         </div>
         <div class="flex justify-end pr-4">
@@ -99,8 +102,12 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            stockItem: {}
+            stockItem: {},
+            suppliers: []
         }
+    },
+    mounted() {
+        this.getSuppliers();
     },
     methods: {
         async addStockItem() {
@@ -112,6 +119,13 @@ export default {
                     errors.value = error.response.data.errors;
                 }
             }
+        },
+        getSuppliers() {
+            axios.get("http://127.0.0.1:8080/api/suppliers")
+                .then((response) => {
+                    this.suppliers = response.data.data;
+                    this.supplierDefault = this.suppliers[0].name
+                });
         }
     }
 }

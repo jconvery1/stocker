@@ -10,6 +10,17 @@ class Delivery extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'delivery_datetime',
+        'order_id',
+        'user_id'
+    ];
+
+    /**
      * Get the order associated with the delivery.
      */
     public function delivery()
