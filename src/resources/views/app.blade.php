@@ -12,7 +12,7 @@
     <div id="app">
         <main class="flex h-screen">
             <aside class="w-40" aria-label="Sidebar">
-                <div class="flex h-screen px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                <div class="flex h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                     <ul class="space-y-2">
                         <a class="flex items-center pl-2.5 mb-5">
                             <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Stocker Logo" />

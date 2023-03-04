@@ -14,14 +14,15 @@
     </div>
     <div class="relative overflow-x-auto m-2 p-2">
         <form  v-if="this.orders !== null">
-            <div class="mb-6">
+            <div class="flex mb-12">
                 <label for="name"
-                    class="block mb-2 text-sm font-medium text-gray-900"
+                    class="block mr-2 w-32 text-sm font-medium text-gray-900"
                 >
                     Which order has been delivered?
                 </label>
                 <!-- Dropdown menu -->
-                <select v-model="orderId">
+                <select v-model="orderId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5">
+                    <option disabled value="">Please select one</option>
                     <option :key="order.id" v-for="order in orders" :value="order.id">
                         {{ order.id }}
                     </option>

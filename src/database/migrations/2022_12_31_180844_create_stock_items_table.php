@@ -20,9 +20,14 @@ class CreateStockItemsTable extends Migration
                 ->references('id')
                 ->on('suppliers');
             $table->string('image')->nullable();
+            $table->string('gender');
+            $table->string('brand');
+            $table->string('colour');
             $table->string('shoe_size');
-            $table->string('material')->nullable();
-            $table->string('category')->nullable();
+            $table->string('material');
+            $table->string('category');
+            $table->integer('price');
+            $table->integer('stock_level');
             $table->timestamps();
         });
     }

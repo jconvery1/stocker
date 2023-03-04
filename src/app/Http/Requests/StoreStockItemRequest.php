@@ -26,9 +26,14 @@ class StoreStockItemRequest extends FormRequest
         return [
             'name' => ['required'],
             'supplier_id' => ['required'],
+            'brand' => ['required'],
+            'gender' => ['required'],
             'shoe_size' => ['required'],
             'material' => ['required'],
-            'category' => ['required']
+            'category' => ['required'],
+            'stock_level' => ['required'],
+            'colour' => ['required'],
+            'price' => ['required']
         ];
     }
 }

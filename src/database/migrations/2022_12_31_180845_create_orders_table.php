@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('supplier_id')
                 ->references('id')
                 ->on('suppliers');
+            $table->boolean('fulfilled')->nullable();
             $table->timestamps();
         });
     }

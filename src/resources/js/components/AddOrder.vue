@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="flex justify-between m-2 p-2">
-        <span class="self-center text-xl font-semibold whitespace-nowrap">
+        <span class="self-center ml-80 text-2xl font-semibold whitespace-nowrap">
             Add Order
         </span>
         <button
@@ -12,24 +12,25 @@
             Cancel
         </button>
     </div>
-  <div class="relative overflow-x-auto m-2 p-2">
+  <div class="relative overflow-x-auto mt-5 m-2 p-2">
     <form v-if="this.stockItems !== null">
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block ml-80 w-32 text-sm font-medium text-gray-900"
             >
                 Stock Item
             </label>
             <!-- Dropdown menu -->
-            <select v-model="stockItemId">
+            <select v-model="stockItemId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5">
+                <option disabled value="">Please select one</option>
                 <option :key="stockItem.id" v-for="stockItem in stockItems" :value="stockItem.id">
                     {{ stockItem.name }}
                 </option>
             </select>
         </div>
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block ml-80 w-32 text-sm font-medium text-gray-900"
             >
                 Quantity
             </label>
@@ -38,21 +39,22 @@
                 type="number"
                 id="quantity"
                 min="1"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/12 p-2.5"
                 required
             >
         </div>
-        <div class="mb-6">
+        <div class="flex mb-12">
             <label for="name"
-                class="block mb-2 text-sm font-medium text-gray-900"
+                class="block ml-80 w-32 text-sm font-medium text-gray-900"
             >
                 Notes
             </label>
-            <input
+            <!-- <input
                 v-model="notes"
                 type="textarea"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
-            >
+            > -->
+            <textarea v-model="notes" id="notes" name="about" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5" placeholder="Enter notes about this order here!"></textarea>
         </div>
         <div class="flex justify-end pr-4">
             <button

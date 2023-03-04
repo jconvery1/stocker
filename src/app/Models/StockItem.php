@@ -18,12 +18,24 @@ class StockItem extends Model
         'name',
         'supplier_id',
         'image',
+        'gender',
+        'brand',
+        'colour',
         'shoe_size',
         'material',
         'category',
+        'stock_level',
+        'price',
         'created_at',
         'updated_at'
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['supplier'];
 
     /**
      * Get the supplier that supplies the stock item.
@@ -47,5 +59,15 @@ class StockItem extends Model
     public function stock_sale()
     {
         return $this->hasMany(StockSale::class);
+    }
+
+    /**
+     * Get the supplier name.
+     *
+     * @return bool
+     */
+    public function getSupplierNameAttribute()
+    {
+        return $this->attributes['supplier_name'] == 'yes';
     }
 }

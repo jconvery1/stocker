@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStockItemRequest;
 use App\Http\Resources\StockItemResource;
 use App\Models\StockItem;
+use App\Models\Supplier;
 
 class StockItemController extends Controller
 {
     public function index()
     {
         return StockItemResource::collection(StockItem::all());
+        // $builtStockItems = [];
+        // foreach($stockitems as $stockitem) {
+        //     $supplierId = $stockitem->supplier_id;
+        //     $supplier = Supplier::where('id', $supplierId)->get();
+        //     $stockitem->resource->attributes->supplier_name = $supplier[0]->name;
+        //     // $builtStockItems = $stockitem;
+        // }
+        // return $stockitems;
     }
 
     public function show(StockItem $stockitem)

@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockItemController;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('users', UserController::class);
 Route::apiResource('customers', CustomerController::class);
 Route::apiResource('deliveries', DeliveryController::class);
+Route::apiResource('dropdowns', DropdownController::class);
+Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
 Route::apiResource('orders', OrderController::class);
 Route::apiResource('sales', SaleController::class);
 Route::apiResource('stockitems', StockItemController::class);

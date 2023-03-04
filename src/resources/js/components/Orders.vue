@@ -29,6 +29,9 @@
                         Created At
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Fulfilled
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                     </th>
                 </tr>
             </thead>
@@ -47,7 +50,10 @@
                         {{ order.supplier_id }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ order.created_at }}
+                        {{ order.created_at.replace("T", " ").slice(0, -5) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ order.fulfilled ? 'Yes' : 'No' }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
                     <RouterLink
@@ -61,6 +67,19 @@
                         rounded
                         "
                         >Edit</RouterLink
+                    >
+                    <RouterLink
+                        v-if="!order.fulfilled"
+                        :to="{ name: 'EditOrder', params: { id: order.id } }"
+                        class="
+                        px-4
+                        py-2
+                        bg-green-500
+                        hover:bg-green-600
+                        text-white
+                        rounded
+                        "
+                        >Fulfill</RouterLink
                     >
                     <button
                     @click="deleteOrder(order)"

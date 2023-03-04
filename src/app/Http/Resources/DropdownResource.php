@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class DropdownResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,8 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'notes' => $this->notes,
-            'order_datetime' => $this->order_datetime,
-            'user_id' => $this->user_id,
-            'supplier_id' => $this->supplier_id,
-            'fulfilled' => $this->fulfilled,
+            'dropdown_group' => $this->dropdown_group,
+            'value' => $this->value,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

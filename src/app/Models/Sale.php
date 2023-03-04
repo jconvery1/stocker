@@ -10,6 +10,20 @@ class Sale extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'customer_id',
+        'sale_price',
+        'user_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
      * Get the user that made the sale.
      */
     public function user()

@@ -24,16 +24,28 @@
                         SupplierID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Image
+                        Price
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Shoe Size
+                        Gender
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Brand
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Colour
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Size
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Material
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Category
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Stock Level
                     </th>
                     <th scope="col" class="px-6 py-3">
                     </th>
@@ -52,7 +64,16 @@
                         {{ stockItem.supplier_id }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ stockItem.image }}
+                        {{ stockItem.price }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.gender }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.brand }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.colour }}
                     </td>
                     <td class="px-6 py-4">
                         {{ stockItem.shoe_size }}
@@ -62,6 +83,9 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ stockItem.category }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ stockItem.stock_level }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
                     <RouterLink

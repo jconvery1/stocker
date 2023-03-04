@@ -41,7 +41,7 @@
                         {{ delivery.order_id }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ delivery.created_at }}
+                        {{ delivery.created_at.replace("T", " ").slice(0, -5) }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
                     <RouterLink

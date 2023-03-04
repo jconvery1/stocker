@@ -41,7 +41,7 @@
                         {{ sale.user_id }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ sale.created_at }}
+                        {{ sale.created_at.replace("T", " ").slice(0, -5) }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
                     <RouterLink
