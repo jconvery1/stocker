@@ -31,13 +31,6 @@ class StockItem extends Model
     ];
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = ['supplier'];
-
-    /**
      * Get the supplier that supplies the stock item.
      */
     public function supplier()
@@ -59,15 +52,5 @@ class StockItem extends Model
     public function stock_sale()
     {
         return $this->hasMany(StockSale::class);
-    }
-
-    /**
-     * Get the supplier name.
-     *
-     * @return bool
-     */
-    public function getSupplierNameAttribute()
-    {
-        return $this->attributes['supplier_name'] == 'yes';
     }
 }

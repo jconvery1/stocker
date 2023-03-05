@@ -11,15 +11,11 @@ class StockItemController extends Controller
 {
     public function index()
     {
-        return StockItemResource::collection(StockItem::all());
-        // $builtStockItems = [];
-        // foreach($stockitems as $stockitem) {
-        //     $supplierId = $stockitem->supplier_id;
-        //     $supplier = Supplier::where('id', $supplierId)->get();
-        //     $stockitem->resource->attributes->supplier_name = $supplier[0]->name;
-        //     // $builtStockItems = $stockitem;
-        // }
-        // return $stockitems;
+        return StockItem::all()->map(function ($stockitem) {
+            $supplier = Supplier::where('id', $stockitem->supplier_id)->get();
+            $stockitem->supplier_name = $supplier[0]->name;
+            return $stockitem;
+        });
     }
 
     public function show(StockItem $stockitem)

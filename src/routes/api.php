@@ -27,10 +27,12 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('customers', CustomerController::class);
 Route::apiResource('deliveries', DeliveryController::class);
 Route::apiResource('dropdowns', DropdownController::class);
-Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
 Route::apiResource('orders', OrderController::class);
 Route::apiResource('sales', SaleController::class);
 Route::apiResource('stockitems', StockItemController::class);
 Route::apiResource('stockorders', StockOrderController::class);
 Route::apiResource('stocksales', StockSaleController::class);
 Route::apiResource('suppliers', SupplierController::class);
+
+//custom API routes
+Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
