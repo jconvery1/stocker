@@ -4,6 +4,13 @@
         <span class="self-center text-xl font-semibold whitespace-nowrap">
             Add Stock Item
         </span>
+        <button
+            @click="$router.push({path: '/stock'})"
+            type="submit"
+            class="text-white bg-slate-500 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        >
+            Cancel
+        </button>
     </div>
     <div class="relative overflow-x-auto m-2 p-2">
         <form v-if="this.dataFetched">
