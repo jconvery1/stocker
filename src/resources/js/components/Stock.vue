@@ -21,7 +21,7 @@
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        SupplierID
+                        Supplier
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Price
@@ -61,10 +61,10 @@
                         {{ stockItem.name }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ stockItem.supplier_id }}
+                        {{ stockItem.supplier_name }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ stockItem.price }}
+                        {{ '£' + stockItem.price }}
                     </td>
                     <td class="px-6 py-4">
                         {{ stockItem.gender }}
@@ -143,7 +143,7 @@ export default {
         getStockItems() {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
-                    this.stockItems = response.data.data;
+                    this.stockItems = response.data;
                     this.tableId++;
                 });
         },
