@@ -16,7 +16,7 @@
         <form v-if="this.dataFetched">
             <div class="grid grid-cols-2">
                 <div>
-                    <div class="flex mb-12">
+                    <div class="flex" :class="{ 'mb-12': !errors.name }">
                         <label
                             for="name"
                             class="block ml-10 w-32 text-sm font-medium text-gray-900"
@@ -31,7 +31,10 @@
                             required
                         >
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.name">
+                        <span class="ml-44 text-sm text-red-400">{{ errors.name[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.supplier_id }">
                         <label for="name"
                             class="block ml-10 w-32 text-sm font-medium text-gray-900"
                         >
@@ -45,7 +48,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.supplier_id">
+                        <span class="ml-44 text-sm text-red-400">{{ errors.supplier_id[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.gender }">
                         <label for="name"
                             class="block ml-10 w-32 text-sm font-medium text-gray-900"
                         >
@@ -59,7 +65,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.gender">
+                        <span class="ml-44 text-sm text-red-400">{{ errors.gender[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.brand }">
                         <label for="name"
                             class="block ml-10 w-32 text-sm font-medium text-gray-900"
                         >
@@ -73,7 +82,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.brand">
+                        <span class="ml-44 text-sm text-red-400">{{ errors.brand[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.colour }">
                         <label for="name"
                             class="block ml-10 w-32 text-sm font-medium text-gray-900"
                         >
@@ -87,7 +99,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.colour">
+                        <span class="ml-44 text-sm text-red-400">{{ errors.colour[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.shoe_size }">
                         <label for="name"
                             class="block ml-10 w-32 text-sm font-medium text-gray-900"
                         >
@@ -97,14 +112,18 @@
                             v-model="stockItem.shoe_size"
                             type="number"
                             min="1"
+                            max="15"
                             step="any"
                             id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5"
                         required>
                     </div>
+                    <div class="flex my-4" v-if="errors.shoe_size">
+                        <span class="ml-44 text-sm text-red-400">{{ errors.shoe_size[0] }}</span>
+                    </div>
                 </div>
                 <div>
-                    <div class="flex mb-12">
+                    <div class="flex" :class="{ 'mb-12': !errors.material }">
                         <label for="name"
                             class="block w-32 text-sm font-medium text-gray-900"
                         >
@@ -117,7 +136,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.material">
+                        <span class="ml-32 text-sm text-red-400">{{ errors.material[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.category }">
                         <label for="name"
                             class="block w-32 text-sm font-medium text-gray-900"
                         >
@@ -130,7 +152,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.category">
+                        <span class="ml-32 text-sm text-red-400">{{ errors.category[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.price }">
                         <label for="name"
                             class="block w-32 text-sm font-medium text-gray-900"
                         >
@@ -145,7 +170,10 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5"
                         required>
                     </div>
-                    <div class="flex mb-12">
+                    <div class="flex my-4" v-if="errors.price">
+                        <span class="ml-32 text-sm text-red-400">{{ errors.price[0] }}</span>
+                    </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.stock_level }">
                         <label for="name"
                             class="block w-32 text-sm font-medium text-gray-900"
                         >
@@ -159,6 +187,9 @@
                             step="any"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5"
                         required>
+                    </div>
+                    <div class="flex my-4" v-if="errors.stock_level">
+                        <span class="ml-32 text-sm text-red-400">{{ errors.stock_level[0] }}</span>
                     </div>
                 </div>
             </div>
@@ -192,6 +223,7 @@ export default {
     },
     data() {
         return {
+            errors: {},
             stockItem: null,
             brands: [],
             categories: [],
@@ -290,7 +322,7 @@ export default {
                 await this.$router.push({path: '/stock'})
             } catch (error) {
                 if (error.response.status === 422) {
-                    errors.value = error.response.data.errors;
+                    this.errors = error.response.data.errors;
                 }
             }
         },

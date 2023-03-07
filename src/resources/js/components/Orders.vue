@@ -13,49 +13,55 @@
         <table v-if="this.orders !== null" class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-blue-50">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="pl-6 py-3">
+                        Order Number
+                    </th>
+                    <th scope="col" class="pl-6 py-3">
                         Order DateTime
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="pl-6 py-3">
                         Notes
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        UserID
+                    <th scope="col" class="pl-6 py-3">
+                        Supplier
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        SupplierID
+                    <th scope="col" class="pl-6 py-3">
+                        Created By
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="pl-6 py-3">
                         Created At
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="pl-6 py-3">
                         Fulfilled
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="pl-6 py-3">
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="order in orders" :key="order.id" class="bg-white border-b hover:bg-gray-50">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <td class="pl-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{ order.id }}
+                    </td>
+                    <td class="pl-6 py-4">
                         {{ order.order_datetime }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="pl-6 py-4">
                         {{ order.notes }}
                     </td>
-                    <td class="px-6 py-4">
-                        {{ order.user_id }}
+                    <td class="pl-6 py-4">
+                        {{ order.supplier_name }}
                     </td>
-                    <td class="px-6 py-4">
-                        {{ order.supplier_id }}
+                    <td class="pl-6 py-4">
+                        {{ order.user_name }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="pl-6 py-4">
                         {{ order.created_at.replace("T", " ").slice(0, -5) }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="pl-6 py-4">
                         {{ order.fulfilled ? 'Yes' : 'No' }}
                     </td>
-                    <td class="py-4 px-6 space-x-2">
+                    <td class="py-4 pl-6 space-x-2">
                     <RouterLink
                         :to="{ name: 'EditOrder', params: { id: order.id } }"
                         class="
@@ -68,21 +74,21 @@
                         "
                         >Edit</RouterLink
                     >
-                    <RouterLink
+                    <button
+                        @click="fulfillOrder(order)"
                         v-if="!order.fulfilled"
-                        :to="{ name: 'EditOrder', params: { id: order.id } }"
                         class="
                         px-4
                         py-2
                         bg-green-500
                         hover:bg-green-600
                         text-white
-                        rounded
-                        "
-                        >Fulfill</RouterLink
+                        rounded"
                     >
+                        Fulfill
+                    </button>
                     <button
-                    @click="deleteOrder(order)"
+                        @click="deleteOrder(order)"
                         class="
                             px-4
                             py-2
@@ -123,7 +129,7 @@ export default {
         getOrders() {
             axios.get("http://127.0.0.1:8080/api/orders")
                 .then((response) => {
-                    this.orders = response.data.data;
+                    this.orders = response.data;
                 });
         },
         async deleteOrder(order) {
@@ -131,6 +137,14 @@ export default {
                 return;
             }
             await axios.delete("http://127.0.0.1:8080/api/orders/" + order.id);
+            this.orders = null;
+            this.getOrders();
+        },
+        async fulfillOrder(order) {
+            if (!window.confirm("Are You Sure?")) {
+                return;
+            }
+            await axios.post("http://127.0.0.1:8080/api/orders/fulfill_order/" + order.id);
             this.orders = null;
             this.getOrders();
         }

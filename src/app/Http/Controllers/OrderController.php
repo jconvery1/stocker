@@ -6,26 +6,33 @@ use App\Http\Resources\OrderResource;
 use App\Http\Resources\StockOrderResource;
 use App\Models\Order;
 use App\Models\StockOrder;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        return OrderResource::collection(Order::all());
+        return Order::all()->map(function ($order) {
+            $supplier = Supplier::where('id', $order->supplier_id)->get();
+            $user = User::where('id', $order->user_id)->get();
+            $order->supplier_name = $supplier[0]->name;
+            $order->user_name = $user[0]->username;
+            return $order;
+        });
     }
 
     public function show(Order $order)
     {
-        $stockorder = StockOrder::where('order_id', $order->id)->get();
-        // return new OrderResource($order);
-        return [new OrderResource($order), new StockOrderResource($stockorder[0])];
+        $stockOrders = StockOrder::where('order_id', $order->id)->get();
+        return $stockOrders;
     }
 
     public function store(StoreOrderRequest $request)
     {
         $order = Order::create($request->validated());
-        StockOrder::createStockOrderFromOrder($order->id, $request);
+        StockOrder::createStockOrderFromOrder($order->id, $request->stock_orders);
         return response()->json("order created!");
     }
 
@@ -37,7 +44,14 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
+        $order->deleteLinkedOrderItems($order);
         $order->delete();
         return response()->json("order deleted");
+    }
+
+    public function fulfillOrder(Order $order)
+    {
+        $order->fulfill($order);
+        return response()->json("order fulfilled!");
     }
 }

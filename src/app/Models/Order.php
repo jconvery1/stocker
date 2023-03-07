@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\StockOrder;
 
 class Order extends Model
 {
@@ -20,7 +21,8 @@ class Order extends Model
         'user_id',
         'supplier_id',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'fulfilled'
     ];
 
     /**
@@ -45,5 +47,19 @@ class Order extends Model
     public function stock_order()
     {
         return $this->hasMany(StockOrder::class);
+    }
+
+    public function deletelinkedOrderItems($order)
+    {
+        $stockOrders = StockOrder::where('order_id', $order->id)->get();
+        foreach ($stockOrders as $stockOrder) {
+            $stockOrder->delete();
+        }
+    }
+
+    public function fulfill($order)
+    {
+        $order->fulfilled = 1;
+        $order->save();
     }
 }

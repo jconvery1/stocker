@@ -38,11 +38,13 @@ class StockOrder extends Model
         return $this->belongsTo(StockItem::class);
     }
 
-    public static function createStockOrderFromOrder($orderId, $request) {
-        $stockOrder = new StockOrder();
-        $stockOrder->order_id = $orderId;
-        $stockOrder->stock_item_id = $request->stock_item_id;
-        $stockOrder->quantity = $request->quantity;
-        $stockOrder->save();
+    public static function createStockOrderFromOrder($orderId, $items) {
+        foreach ($items as $item) {
+            $stockOrder = new StockOrder();
+            $stockOrder->order_id = $orderId;
+            $stockOrder->stock_item_id = $item['stock_item_id'];
+            $stockOrder->quantity = $item['quantity'];
+            $stockOrder->save();
+        }
     }
 }
