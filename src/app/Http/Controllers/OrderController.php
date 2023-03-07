@@ -25,8 +25,12 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $stockOrders = StockOrder::where('order_id', $order->id)->get();
-        return $stockOrders;
+        return StockOrder::where('order_id', $order->id)->get()->map(function ($stockOrder) {
+            $order = Order::where('id', $stockOrder->order_id)->get();
+            $supplier = Supplier::where('id', $order[0]->supplier_id)->get();
+            $stockOrder->supplier_id = $supplier[0]->id;
+            return $stockOrder;
+        });
     }
 
     public function store(StoreOrderRequest $request)
@@ -39,6 +43,7 @@ class OrderController extends Controller
     public function update(StoreOrderRequest $request, Order $order)
     {
         $order->update($request->validated());
+        StockOrder::updateStockOrdersForOrder($order->id, $request->stock_orders);
         return response()->json("order updated");
     }
 

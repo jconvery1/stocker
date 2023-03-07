@@ -145,7 +145,7 @@ export default {
             stockItems: null,
             stockItem: {},
             stockItemId: '',
-            stockQuantity: 1,
+            stockQuantity: '',
             notes: '',
             stockOrder: {},
             order: [],

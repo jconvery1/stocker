@@ -47,4 +47,53 @@ class StockOrder extends Model
             $stockOrder->save();
         }
     }
+
+    public static function updateStockOrdersForOrder($orderId, $items)
+    {
+        $stockOrders = StockOrder::where('order_id', $orderId)->get();
+
+        //check if any items match any stock orders and update if need be
+        foreach ($stockOrders as $stockOrder) {
+            $matchFound = false;
+            foreach ($items as $item) {
+                if ($stockOrder->stock_item_id == $item['stock_item_id']) {
+                    if ($stockOrder->quantity != $item['quantity']) {
+                        $stockOrder->quantity = $item['quantity'];
+                        $stockOrder->save();
+                    }
+                    $matchFound = true;
+                }
+            }
+
+            //if current stock order doesn't match any items, delete it
+            if (!$matchFound) {
+                $stockOrder->delete();
+            }
+        }
+
+        //check if any items do not match an existing stock order
+        //if not, then create a new stock order from the item
+        foreach ($items as $item) {
+            $matchFound = false;
+            foreach ($stockOrders as $stockOrder) {
+                if ($stockOrder->stock_item_id == $item['stock_item_id']) {
+                    if ($stockOrder->quantity != $item['quantity']) {
+                        $stockOrder->quantity = $item['quantity'];
+                        $stockOrder->save();
+                    }
+                    $matchFound = true;
+                }
+            }
+
+            //if existing stock order doesn't match any new stock orders, delete it
+            //and create new stock order from item
+            if (!$matchFound) {
+                $newStockOrder = new StockOrder();
+                $newStockOrder->stock_item_id = $item['stock_item_id'];
+                $newStockOrder->quantity = $item['quantity'];
+                $newStockOrder->order_id = $orderId;
+                $newStockOrder->save();
+            }
+        }
+    }
 }

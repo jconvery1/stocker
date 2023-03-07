@@ -157,19 +157,19 @@ export default {
     },
     mounted() {
         this.getOrder(this.$route.params.id);
-        this.getStockItems();
     },
     methods: {
         getStockItems() {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
                     this.stockItems = response.data;
-                    this.order.forEach(orderItem => {
-                        const stockItem = this.stockItems.find(item => item.id === orderItem.stock_item_id);
-                        console.log(stockItem);
-                        orderItem.name = stockItem.name;
-                    });
-                    this.filterStockItems();
+                    if (this.order.length > 0) {
+                        this.order.forEach(orderItem => {
+                            const stockItem = this.stockItems.find(item => item.id === orderItem.stock_item_id);
+                            orderItem.name = stockItem.name;
+                        });
+                        this.filterStockItems();
+                    }
                     this.tableId++;
                 });
         },
@@ -177,12 +177,23 @@ export default {
             axios.get("http://127.0.0.1:8080/api/orders/" + id)
                 .then((response) => {
                     this.order = response.data;
+                    this.getStockItems();
                 });
         },
         async editOrder() {
+            const timeElapsed = Date.now();
+            const today = new Date(timeElapsed).toISOString();
+            const now = today.replace("T", " ");
+            const order = {
+                notes: this.notes,
+                supplier_id: this.order[0].supplier_id,
+                user_id: 1,
+                order_datetime: now.slice(0, -5),
+                fulfilled: 0,
+                stock_orders: this.order
+            }
             try {
-                await axios.put("http://127.0.0.1:8080/api/orders/" + this.id, this.order);
-                await axios.put("http://127.0.0.1:8080/api/stockorders/" + this.stockOrder.id, this.stockOrder);
+                await axios.put("http://127.0.0.1:8080/api/orders/" + this.id, order)
                 await this.$router.push({path: '/orders'})
             } catch (error) {
                 if (error.response.status === 422) {
@@ -214,7 +225,7 @@ export default {
 
             //reset form fields
             this.stockItemId = '';
-            this.stockQuantity = 1;
+            this.stockQuantity = '';
         },
         removeItemFromOrder(item) {
             const index = this.order.findIndex((stockItem) => {
@@ -232,10 +243,19 @@ export default {
             }
         },
         filterStockItems() {
+            //get supplier and item ids
             const item = this.stockItems.find(item => item.id === this.order[0].stock_item_id);
+            let ids = this.order.map(item => item.stock_item_id);
+
+            //remove items from dropdown that don't have same supplier
             this.stockItems = this.stockItems.filter((stockItem) => {
                 return stockItem.supplier_id == item.supplier_id;
             })
+
+            //remove item if it is in the summary
+            this.stockItems = this.stockItems.filter((item) => {
+                return ids.every(id => id != item.id);
+            });
         }
     }
 }
