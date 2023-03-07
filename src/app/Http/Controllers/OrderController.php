@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
-use App\Http\Resources\OrderResource;
-use App\Http\Resources\StockOrderResource;
 use App\Models\Order;
 use App\Models\StockOrder;
 use App\Models\Supplier;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {

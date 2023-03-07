@@ -14,16 +14,19 @@
             <thead class="text-xs text-gray-700 uppercase bg-blue-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        CustomerID
+                        Sale Number
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Sale Price
+                        Created By
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        UserID
+                        Customer
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Created At
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Sale Price
                     </th>
                     <th scope="col" class="px-6 py-3">
                     </th>
@@ -32,16 +35,19 @@
             <tbody>
                 <tr v-for="sale in sales" :key="sale.id" class="bg-white border-b hover:bg-gray-50">
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {{ sale.customer_id }}
+                        {{ sale.id }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ sale.sale_price }}
+                        {{ sale.user_name }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ sale.user_id }}
+                        {{ sale.customer_name }}
                     </td>
                     <td class="px-6 py-4">
                         {{ sale.created_at.replace("T", " ").slice(0, -5) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ '£' + sale.sale_price }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
                     <RouterLink
@@ -97,7 +103,7 @@ export default {
         getSales() {
             axios.get("http://127.0.0.1:8080/api/sales")
                 .then((response) => {
-                    this.sales = response.data.data;
+                    this.sales = response.data;
                 });
         }
     }

@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Resources\SaleResource;
+use App\Models\Customer;
+use App\Models\User;
 use App\Models\Sale;
+use App\Models\StockSale;
 
 class SaleController extends Controller
 {
     public function index()
     {
-        return SaleResource::collection(Sale::all());
+        return Sale::all()->map(function ($sale) {
+            $customer = Customer::where('id', $sale->customer_id)->get();
+            $user = User::where('id', $sale->user_id)->get();
+            $sale->customer_name = $customer[0]->forename . ' ' . $customer[0]->surname;
+            $sale->user_name = $user[0]->username;
+            return $sale;
+        });
     }
 
     public function show(Sale $sale)
@@ -20,7 +29,8 @@ class SaleController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
-        Sale::create($request->validated());
+        $sale = Sale::create($request->validated());
+        StockSale::createStockSaleFromSale($sale->id, $request->stock_sales);
         return response()->json("sale created!");
     }
 
