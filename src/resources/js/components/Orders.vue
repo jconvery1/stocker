@@ -64,6 +64,7 @@
                     <td class="py-4 pl-6 space-x-2">
                     <button
                         @click="editOrder(order)"
+                        v-if="!order.fulfilled"
                         class="
                         px-4
                         py-2
@@ -74,18 +75,6 @@
                         "
                         >Edit</button
                     >
-                    <button
-                        @click="deleteOrder(order)"
-                        class="
-                            px-4
-                            py-2
-                            bg-red-500
-                            hover:bg-red-700
-                            text-white
-                            rounded"
-                    >
-                        Delete
-                    </button>
                     <button
                         @click="fulfillOrder(order)"
                         v-if="!order.fulfilled"
@@ -98,6 +87,18 @@
                         rounded"
                     >
                         Fulfill
+                    </button>
+                    <button
+                        @click="deleteOrder(order)"
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
                     </button>
                     </td>
                 </tr>

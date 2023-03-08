@@ -50,8 +50,8 @@
                         {{ '£' + sale.sale_price }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
-                    <RouterLink
-                        :to="{ name: 'EditSale', params: { id: sale.id } }"
+                    <button
+                        @click="editSale(sale)"
                         class="
                         px-4
                         py-2
@@ -60,8 +60,9 @@
                         text-white
                         rounded
                         "
-                        >Edit</RouterLink
                     >
+                        Edit
+                    </button>
                     <button
                         @click="deleteSale(sale)"
                         class="
@@ -114,6 +115,9 @@ export default {
             await axios.delete("http://127.0.0.1:8080/api/sales/" + sale.id);
             this.sales = null;
             this.getSales();
+        },
+        editSale(sale) {
+            this.$router.push({name: 'EditSale', params: { id: sale.id } })
         }
     }
 }
