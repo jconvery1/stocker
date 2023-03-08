@@ -68,7 +68,7 @@
             </div>
             <div class="flex justify-end pr-4">
                 <button
-                    @click="addDelivery"
+                    @click="editDelivery"
                     type="button"
                     class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                 >
@@ -89,6 +89,11 @@
 <script>
 import axios from 'axios';
 export default {
+    props: {
+        id: {
+            type: Number
+        }
+    },
     data() {
         return {
             delivery: null,
@@ -136,7 +141,7 @@ export default {
                     this.getOrder(this.delivery.order_id);
                 });
         },
-        async addDelivery() {
+        async editDelivery() {
             const timeElapsed = Date.now();
             const today = new Date(timeElapsed).toISOString();
             const now = today.replace("T", " ");
@@ -146,11 +151,11 @@ export default {
                 order_id: this.orderId
             }
             try {
-                await axios.post("http://127.0.0.1:8080/api/deliveries", delivery)
+                await axios.put("http://127.0.0.1:8080/api/deliveries/" + this.id, delivery)
                 await this.$router.push({path: '/deliveries'})
             } catch (error) {
                 if (error.response.status === 422) {
-                    errors.value = error.response.data.errors;
+                    this.errors.value = error.response.data.errors;
                 }
             }
         }

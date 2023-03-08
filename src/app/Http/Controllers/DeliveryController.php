@@ -35,6 +35,18 @@ class DeliveryController extends Controller
 
     public function update(StoreDeliveryRequest $request, Delivery $delivery)
     {
+        if ($delivery->order_id != $request->order_id) {
+            //unfulfill previous order
+            $previousOrder = Order::where('id', $delivery->order_id)->get();
+            $previousOrder[0]->fulfilled = 0;
+            $previousOrder[0]->save();
+
+            //fulfill new order
+            $order = Order::where('id', $request->order_id)->get();
+            $order[0]->fulfilled = 1;
+            $order[0]->save();
+        }
+
         $delivery->update($request->validated());
         return response()->json("delivery updated");
     }
