@@ -11,7 +11,7 @@
     </div>
     <div class="relative overflow-x-auto">
         <table v-if="this.orders !== null" class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+            <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
                 <tr>
                     <th scope="col" class="pl-6 py-3">
                         Order Number
@@ -63,6 +63,18 @@
                     </td>
                     <td class="py-4 pl-6 space-x-2">
                     <button
+                        @click="deleteOrder(order)"
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
+                    </button>
+                    <button
                         @click="editOrder(order)"
                         v-if="!order.fulfilled"
                         class="
@@ -81,24 +93,12 @@
                         class="
                         px-4
                         py-2
-                        bg-green-500
-                        hover:bg-green-600
+                        bg-violet-500
+                        hover:bg-violet-600
                         text-white
                         rounded"
                     >
                         Fulfill
-                    </button>
-                    <button
-                        @click="deleteOrder(order)"
-                        class="
-                            px-4
-                            py-2
-                            bg-red-500
-                            hover:bg-red-700
-                            text-white
-                            rounded"
-                    >
-                        Delete
                     </button>
                     </td>
                 </tr>

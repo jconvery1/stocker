@@ -15,7 +15,7 @@
             v-if="this.stockItems !== null"
             class="w-full text-sm text-left text-gray-500"
         >
-            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+            <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
                 <tr>
                     <th scope="col" class="pl-6 py-3">
                         Stock Number
@@ -58,7 +58,7 @@
                 <tr
                     v-for="stockItem in stockItems"
                     :key="stockItem.id"
-                    class="bg-white border-b hover:bg-gray-50"
+                    class="bg-white border hover:bg-gray-50"
                 >
                     <td class="pl-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ stockItem.id }}
@@ -95,6 +95,18 @@
                     </td>
                     <td class="py-4 pl-6 space-x-2">
                     <button
+                    @click="deleteStockItem(stockItem)"
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
+                    </button>
+                    <button
                         @click="editStockItem(stockItem)"
                         class="
                         px-4
@@ -118,18 +130,6 @@
                         rounded"
                     >
                         Order
-                    </button>
-                    <button
-                    @click="deleteStockItem(stockItem)"
-                        class="
-                            px-4
-                            py-2
-                            bg-red-500
-                            hover:bg-red-700
-                            text-white
-                            rounded"
-                    >
-                        Delete
                     </button>
                     </td>
                 </tr>

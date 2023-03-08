@@ -11,16 +11,19 @@
     </div>
     <div class="relative overflow-x-auto">
         <table v-if="this.deliveries !== null" class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+            <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        UserID
+                        Delivery Number
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Order Number
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Delivery DateTime
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        OrderID
+                        Created By
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Created At
@@ -32,20 +35,23 @@
             <tbody>
                 <tr v-for="delivery in deliveries" :key="delivery.id" class="bg-white border-b hover:bg-gray-50">
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {{ delivery.user_id }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ delivery.delivery_datetime }}
+                        {{ delivery.id }}
                     </td>
                     <td class="px-6 py-4">
                         {{ delivery.order_id }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ delivery.created_at.replace("T", " ").slice(0, -5) }}
+                        {{ delivery.delivery_datetime.replace("T", " ").slice(0, -3) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ delivery.user_name }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ delivery.created_at.replace("T", " ").slice(0, -11) }}
                     </td>
                     <td class="py-4 px-6 space-x-2">
-                    <RouterLink
-                        :to="{ name: 'EditDelivery', params: { id: delivery.id } }"
+                    <button
+                        @click="editDelivery(delivery)"
                         class="
                         px-4
                         py-2
@@ -54,8 +60,9 @@
                         text-white
                         rounded
                         "
-                        >Edit</RouterLink
-                    >
+                        >
+                        Edit
+                    </button>
                     <button
                         @click="deleteDelivery(delivery)"
                         class="
@@ -98,7 +105,7 @@ export default {
         getDeliveries() {
             axios.get("http://127.0.0.1:8080/api/deliveries")
                 .then((response) => {
-                    this.deliveries = response.data.data;
+                    this.deliveries = response.data;
                 });
         },
         async deleteDelivery(delivery) {
@@ -108,6 +115,9 @@ export default {
             await axios.delete("http://127.0.0.1:8080/api/deliveries/" + delivery.id);
             this.deliveries = null;
             this.getDeliveries();
+        },
+        editDelivery(delivery) {
+            this.$router.push({name: 'EditDelivery', params: { id: delivery.id }});
         }
     }
 }

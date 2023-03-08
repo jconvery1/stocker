@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
+use App\Models\StockItem;
 use App\Models\StockOrder;
 use App\Models\Supplier;
 use App\Models\User;
@@ -25,7 +26,9 @@ class OrderController extends Controller
         return StockOrder::where('order_id', $order->id)->get()->map(function ($stockOrder) {
             $order = Order::where('id', $stockOrder->order_id)->get();
             $supplier = Supplier::where('id', $order[0]->supplier_id)->get();
+            $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
             $stockOrder->supplier_id = $supplier[0]->id;
+            $stockOrder->stock_item_name = $stockItem[0]->name;
             return $stockOrder;
         });
     }

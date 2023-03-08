@@ -11,7 +11,7 @@
     </div>
     <div class="relative overflow-x-auto">
         <table v-if="this.sales !== null" class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+            <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Sale Number
@@ -51,6 +51,18 @@
                     </td>
                     <td class="py-4 px-6 space-x-2">
                     <button
+                        @click="deleteSale(sale)"
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
+                    </button>
+                    <button
                         @click="editSale(sale)"
                         class="
                         px-4
@@ -62,18 +74,6 @@
                         "
                     >
                         Edit
-                    </button>
-                    <button
-                        @click="deleteSale(sale)"
-                        class="
-                            px-4
-                            py-2
-                            bg-red-500
-                            hover:bg-red-700
-                            text-white
-                            rounded"
-                    >
-                        Delete
                     </button>
                     </td>
                 </tr>

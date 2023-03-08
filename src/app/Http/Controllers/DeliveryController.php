@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDeliveryRequest;
 use App\Http\Resources\DeliveryResource;
 use App\Models\Delivery;
+use App\Models\Order;
+use App\Models\User;
 
 class DeliveryController extends Controller
 {
     public function index()
     {
-        return DeliveryResource::collection(Delivery::all());
+        return Delivery::all()->map(function ($delivery) {
+            $user = User::where('id', $delivery->user_id)->get();
+            $delivery->user_name = $user[0]->username;
+            return $delivery;
+        });
     }
 
     public function show(Delivery $delivery)
@@ -21,6 +27,9 @@ class DeliveryController extends Controller
     public function store(StoreDeliveryRequest $request)
     {
         Delivery::create($request->validated());
+        $order = Order::where('id', $request->order_id)->get();
+        $order[0]->fulfilled = 1;
+        $order[0]->save();
         return response()->json("delivery created!");
     }
 
