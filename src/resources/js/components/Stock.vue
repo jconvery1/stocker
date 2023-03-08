@@ -104,8 +104,21 @@
                         text-white
                         rounded
                         "
-                        >Edit</RouterLink
                     >
+                        Edit
+                    </RouterLink>
+                    <RouterLink
+                        :to="{ name: 'AddOrder', params: { id: stockItem.id, stockCollectionRedirect: true } }"
+                        class="
+                        px-4
+                        py-2
+                        bg-violet-500
+                        hover:bg-violet-600
+                        text-white
+                        rounded"
+                    >
+                        Order
+                    </RouterLink>
                     <button
                     @click="deleteStockItem(stockItem)"
                         class="

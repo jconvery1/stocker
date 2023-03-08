@@ -5,7 +5,7 @@
             Add Order
         </span>
         <button
-            @click="$router.push({path: '/orders'})"
+            @click="this.redirectFromAddOrder"
             type="submit"
             class="text-white bg-slate-500 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
         >
@@ -139,13 +139,21 @@
 <script>
 import axios from 'axios';
 export default {
+    props: {
+        id: {
+            type: Number
+        },
+        stockCollectionRedirect: {
+            type: Boolean
+        }
+    },
     data() {
         return {
             dropdown: false,
             stockItems: null,
             stockItem: {},
             stockItemId: '',
-            stockQuantity: '',
+            stockQuantity: 1,
             notes: '',
             stockOrder: {},
             order: [],
@@ -155,8 +163,14 @@ export default {
     },
     mounted() {
         this.getStockItems();
+        if (this.stockCollectionRedirect) {
+            this.populateOrder(this.$route.params.id);
+        }
     },
     methods: {
+        populateOrder(id) {
+            this.stockItemId = id;
+        },
         getStockItems() {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
@@ -234,6 +248,9 @@ export default {
             if (this.order.length == 0) {
                 this.getStockItems();
             }
+        },
+        redirectFromAddOrder() {
+            this.stockCollectionRedirect ? this.$router.push({path: '/stock'}) : this.$router.push({path: '/orders'});
         }
     }
 }

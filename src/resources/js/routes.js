@@ -45,6 +45,7 @@ export default {
             path: "/orders/add",
             name: "AddOrder",
             component: AddOrder,
+            props: true,
         },
         {
             path: "/orders/edit/:id",
