@@ -94,8 +94,8 @@
                         {{ stockItem.stock_level }}
                     </td>
                     <td class="py-4 pl-6 space-x-2">
-                    <RouterLink
-                        :to="{ name: 'EditStockItem', params: { id: stockItem.id } }"
+                    <button
+                        @click="editStockItem(stockItem)"
                         class="
                         px-4
                         py-2
@@ -106,9 +106,9 @@
                         "
                     >
                         Edit
-                    </RouterLink>
-                    <RouterLink
-                        :to="{ name: 'AddOrder', params: { id: stockItem.id, stockCollectionRedirect: true } }"
+                    </button>
+                    <button
+                        @click="orderStockItem(stockItem)"
                         class="
                         px-4
                         py-2
@@ -118,7 +118,7 @@
                         rounded"
                     >
                         Order
-                    </RouterLink>
+                    </button>
                     <button
                     @click="deleteStockItem(stockItem)"
                         class="
@@ -173,6 +173,12 @@ export default {
             await axios.delete("http://127.0.0.1:8080/api/stockitems/" + stockItem.id);
             this.stockItems = null;
             this.getStockItems();
+        },
+        editStockItem(stockItem) {
+            this.$router.push({name: 'EditStockItem', params: { id: stockItem.id } })
+        },
+        orderStockItem(stockItem) {
+            this.$router.push({name: 'AddOrder', params: { id: stockItem.id, stockCollectionRedirect: true } })
         }
     }
 }

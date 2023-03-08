@@ -62,8 +62,8 @@
                         {{ order.fulfilled ? 'Yes' : 'No' }}
                     </td>
                     <td class="py-4 pl-6 space-x-2">
-                    <RouterLink
-                        :to="{ name: 'EditOrder', params: { id: order.id } }"
+                    <button
+                        @click="editOrder(order)"
                         class="
                         px-4
                         py-2
@@ -72,8 +72,20 @@
                         text-white
                         rounded
                         "
-                        >Edit</RouterLink
+                        >Edit</button
                     >
+                    <button
+                        @click="deleteOrder(order)"
+                        class="
+                            px-4
+                            py-2
+                            bg-red-500
+                            hover:bg-red-700
+                            text-white
+                            rounded"
+                    >
+                        Delete
+                    </button>
                     <button
                         @click="fulfillOrder(order)"
                         v-if="!order.fulfilled"
@@ -86,18 +98,6 @@
                         rounded"
                     >
                         Fulfill
-                    </button>
-                    <button
-                        @click="deleteOrder(order)"
-                        class="
-                            px-4
-                            py-2
-                            bg-red-500
-                            hover:bg-red-700
-                            text-white
-                            rounded"
-                    >
-                        Delete
                     </button>
                     </td>
                 </tr>
@@ -147,6 +147,9 @@ export default {
             await axios.post("http://127.0.0.1:8080/api/orders/fulfill_order/" + order.id);
             this.orders = null;
             this.getOrders();
+        },
+        editOrder(order) {
+            this.$router.push({name: 'EditOrder', params: { id: order.id } })
         }
     }
 }
