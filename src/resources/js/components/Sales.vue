@@ -44,7 +44,7 @@
                         {{ sale.customer_name }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ sale.created_at.replace("T", " ").slice(0, -5) }}
+                        {{ sale.created_at.replace("T", " ").slice(0, -11) }}
                     </td>
                     <td class="px-6 py-4">
                         {{ '£' + sale.sale_price }}
@@ -63,6 +63,7 @@
                         >Edit</RouterLink
                     >
                     <button
+                        @click="deleteSale(sale)"
                         class="
                             px-4
                             py-2
@@ -105,6 +106,14 @@ export default {
                 .then((response) => {
                     this.sales = response.data;
                 });
+        },
+        async deleteSale(sale) {
+            if (!window.confirm("Are You Sure?")) {
+                return;
+            }
+            await axios.delete("http://127.0.0.1:8080/api/sales/" + sale.id);
+            this.sales = null;
+            this.getSales();
         }
     }
 }

@@ -77,10 +77,6 @@ class StockOrder extends Model
             $matchFound = false;
             foreach ($stockOrders as $stockOrder) {
                 if ($stockOrder->stock_item_id == $item['stock_item_id']) {
-                    if ($stockOrder->quantity != $item['quantity']) {
-                        $stockOrder->quantity = $item['quantity'];
-                        $stockOrder->save();
-                    }
                     $matchFound = true;
                 }
             }

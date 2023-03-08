@@ -7,6 +7,7 @@ use App\Http\Resources\SaleResource;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\Sale;
+use App\Models\StockItem;
 use App\Models\StockSale;
 
 class SaleController extends Controller
@@ -24,7 +25,12 @@ class SaleController extends Controller
 
     public function show(Sale $sale)
     {
-        return new SaleResource($sale);
+        // return new SaleResource($sale);
+        return StockSale::where('sale_id', $sale->id)->get()->map(function ($stockSale) {
+            $stockItem = StockItem::where('id', $stockSale->stock_item_id)->get();
+            $stockSale->name = $stockItem[0]->name;
+            return $stockSale;
+        });
     }
 
     public function store(StoreSaleRequest $request)
@@ -36,7 +42,10 @@ class SaleController extends Controller
 
     public function update(StoreSaleRequest $request, Sale $sale)
     {
+        // $sale->update($request->validated());
+        // return response()->json("sale updated");
         $sale->update($request->validated());
+        StockSale::updateStockSalesForSale($sale->id, $request->stock_sales);
         return response()->json("sale updated");
     }
 

@@ -56,7 +56,7 @@
                         {{ order.user_name }}
                     </td>
                     <td class="pl-6 py-4">
-                        {{ order.created_at.replace("T", " ").slice(0, -5) }}
+                        {{ order.created_at.replace("T", " ").slice(0, -11) }}
                     </td>
                     <td class="pl-6 py-4">
                         {{ order.fulfilled ? 'Yes' : 'No' }}
