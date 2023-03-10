@@ -29,6 +29,7 @@ class OrderController extends Controller
             $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
             $stockOrder->supplier_id = $supplier[0]->id;
             $stockOrder->stock_item_name = $stockItem[0]->name;
+            $stockOrder->notes = $order[0]->notes;
             return $stockOrder;
         });
     }
@@ -56,7 +57,9 @@ class OrderController extends Controller
 
     public function fulfillOrder(Order $order)
     {
+        $stockOrders = StockOrder::where('order_id', $order->id)->get();
         $order->fulfill($order);
+        StockItem::updateStockLevelsFromFulfillment($stockOrders);
         return response()->json("order fulfilled!");
     }
 }

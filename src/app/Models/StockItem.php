@@ -53,4 +53,22 @@ class StockItem extends Model
     {
         return $this->hasMany(StockSale::class);
     }
+
+    public static function updateStockLevelsFromFulfillment($stockOrders)
+    {
+        foreach($stockOrders as $stockOrder) {
+            $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
+            $stockItem[0]->stock_level += $stockOrder->quantity;
+            $stockItem[0]->save();
+        }
+    }
+
+    public static function updateStockLevelsFromDeliveryEdit($stockOrders)
+    {
+        foreach ($stockOrders as $stockOrder) {
+            $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
+            $stockItem[0]->stock_level -= $stockOrder->quantity;
+            $stockItem[0]->save();
+        }
+    }
 }

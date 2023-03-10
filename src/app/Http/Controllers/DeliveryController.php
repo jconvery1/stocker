@@ -6,6 +6,8 @@ use App\Http\Requests\StoreDeliveryRequest;
 use App\Http\Resources\DeliveryResource;
 use App\Models\Delivery;
 use App\Models\Order;
+use App\Models\StockItem;
+use App\Models\StockOrder;
 use App\Models\User;
 
 class DeliveryController extends Controller
@@ -30,6 +32,8 @@ class DeliveryController extends Controller
         $order = Order::where('id', $request->order_id)->get();
         $order[0]->fulfilled = 1;
         $order[0]->save();
+        $stockOrders = StockOrder::where('order_id', $order[0]->id)->get();
+        StockItem::updateStockLevelsFromFulfillment($stockOrders);
         return response()->json("delivery created!");
     }
 
@@ -40,11 +44,15 @@ class DeliveryController extends Controller
             $previousOrder = Order::where('id', $delivery->order_id)->get();
             $previousOrder[0]->fulfilled = 0;
             $previousOrder[0]->save();
+            $stockOrders = StockOrder::where('order_id', $previousOrder[0]->id)->get();
+            StockItem::updateStockLevelsFromDeliveryEdit($stockOrders);
 
             //fulfill new order
             $order = Order::where('id', $request->order_id)->get();
             $order[0]->fulfilled = 1;
             $order[0]->save();
+            $newStockOrders = StockOrder::where('order_id', $order[0]->id)->get();
+            StockItem::updateStockLevelsFromFulfillment($newStockOrders);
         }
 
         $delivery->update($request->validated());

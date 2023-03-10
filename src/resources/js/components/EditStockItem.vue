@@ -1,8 +1,8 @@
 <template>
 <div>
-    <div class="flex justify-between m-2 p-2">
+    <div v-if="this.dataFetched" class="flex justify-between m-2 p-2">
         <span class="self-center text-xl font-semibold whitespace-nowrap">
-            Add Stock Item
+            Edit Stock Item - {{ this.stockItem.name }}
         </span>
         <button
             @click="$router.push({path: '/stock'})"
