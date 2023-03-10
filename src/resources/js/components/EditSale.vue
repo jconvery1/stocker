@@ -205,6 +205,10 @@ export default {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
                     this.stockItems = response.data;
+                    //remove item if it is in the summary
+                    this.stockItems = this.stockItems.filter((item) => {
+                        return this.sale.every(sale => sale.stock_item_id != item.id);
+                    });
                     this.tableId++;
                 });
         },
@@ -281,6 +285,9 @@ export default {
                 return stockItem.stock_item_id == item.stock_item_id;
             })
             this.sale.splice(index, 1);
+
+            item.id = item.stock_item_id;
+            this.stockItems.push(item);
 
             //adjust totals
             this.totalQuantity -= item.quantity;
