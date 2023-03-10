@@ -17,40 +17,40 @@
         >
             <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
                 <tr>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Stock Number
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Name
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Supplier
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Price
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Gender
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Brand
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Colour
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Size
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Material
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Category
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                         Stock Level
                     </th>
-                    <th scope="col" class="pl-6 py-3">
+                    <th scope="col" class="pl-4 py-3">
                     </th>
                 </tr>
             </thead>
@@ -60,40 +60,40 @@
                     :key="stockItem.id"
                     class="bg-white border hover:bg-gray-50"
                 >
-                    <td class="pl-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <td class="pl-4 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ stockItem.id }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.name }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.supplier_name }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ '£' + stockItem.price }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.gender }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.brand }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.colour }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.shoe_size }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.material }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.category }}
                     </td>
-                    <td class="pl-6 py-4">
+                    <td class="pl-4 py-4">
                         {{ stockItem.stock_level }}
                     </td>
-                    <td class="py-4 pl-6 space-x-2">
+                    <td class="py-4 pl-4 space-x-2">
                     <button
                     @click="deleteStockItem(stockItem)"
                         class="
