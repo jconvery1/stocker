@@ -53,6 +53,10 @@ class DeliveryController extends Controller
 
     public function destroy(Delivery $delivery)
     {
+        //mark order as unfulfilled if delivery is deleted
+        $order = Order::where('id', $delivery->order_id)->get();
+        $order[0]->fulfilled = 0;
+        $order[0]->save();
         $delivery->delete();
         return response()->json("delivery deleted");
     }
