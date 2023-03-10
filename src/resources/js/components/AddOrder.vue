@@ -198,6 +198,7 @@ export default {
             }
             try {
                 await axios.post("http://127.0.0.1:8080/api/orders", order)
+                axios.get("http://127.0.0.1:8080/api/email")
                 await this.$router.push({path: '/orders'})
             } catch (error) {
                 if (error.response.status === 422) {

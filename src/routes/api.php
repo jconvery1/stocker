@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockItemController;
@@ -37,3 +38,4 @@ Route::apiResource('suppliers', SupplierController::class);
 //custom API routes
 Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
 Route::post('orders/fulfill_order/{order}', [OrderController::class, 'fulfillOrder']);
+Route::get('email', [MailController::class, 'sendMail']);
