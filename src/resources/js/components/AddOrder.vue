@@ -193,7 +193,6 @@ export default {
                 supplier_id: this.order[0].supplier_id,
                 user_id: 1,
                 order_datetime: now.slice(0, -5),
-                fulfilled: 0,
                 stock_orders: this.order
             }
             try {
