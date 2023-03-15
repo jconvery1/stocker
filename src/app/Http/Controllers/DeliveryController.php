@@ -15,8 +15,8 @@ class DeliveryController extends Controller
     public function index()
     {
         return Delivery::all()->map(function ($delivery) {
-            $user = User::where('id', $delivery->user_id)->get();
-            $delivery->user_name = $user[0]->username;
+            $user = User::find($delivery->user_id);
+            $delivery->user_name = $user->username;
             return $delivery;
         });
     }
@@ -29,10 +29,10 @@ class DeliveryController extends Controller
     public function store(StoreDeliveryRequest $request)
     {
         Delivery::create($request->validated());
-        $order = Order::where('id', $request->order_id)->get();
-        $order[0]->fulfilled = 1;
-        $order[0]->save();
-        $stockOrders = StockOrder::where('order_id', $order[0]->id)->get();
+        $order = Order::find($request->order_id);
+        $order->fulfilled = 1;
+        $order->save();
+        $stockOrders = StockOrder::where('order_id', $order->id)->get();
         StockItem::updateStockLevelsFromFulfillment($stockOrders);
         return response()->json("delivery created!");
     }
@@ -40,18 +40,16 @@ class DeliveryController extends Controller
     public function update(StoreDeliveryRequest $request, Delivery $delivery)
     {
         if ($delivery->order_id != $request->order_id) {
-            //unfulfill previous order
-            $previousOrder = Order::where('id', $delivery->order_id)->get();
-            $previousOrder[0]->fulfilled = 0;
-            $previousOrder[0]->save();
-            $stockOrders = StockOrder::where('order_id', $previousOrder[0]->id)->get();
+            $previousOrder = Order::find('id', $delivery->order_id);
+            $previousOrder->fulfilled = 0;
+            $previousOrder->save();
+            $stockOrders = StockOrder::where('order_id', $previousOrder->id)->get();
             StockItem::updateStockLevelsFromDeliveryEdit($stockOrders);
 
-            //fulfill new order
-            $order = Order::where('id', $request->order_id)->get();
-            $order[0]->fulfilled = 1;
-            $order[0]->save();
-            $newStockOrders = StockOrder::where('order_id', $order[0]->id)->get();
+            $order = Order::find($request->order_id);
+            $order->fulfilled = 1;
+            $order->save();
+            $newStockOrders = StockOrder::where('order_id', $order->id)->get();
             StockItem::updateStockLevelsFromFulfillment($newStockOrders);
         }
 
@@ -61,10 +59,9 @@ class DeliveryController extends Controller
 
     public function destroy(Delivery $delivery)
     {
-        //mark order as unfulfilled if delivery is deleted
-        $order = Order::where('id', $delivery->order_id)->get();
-        $order[0]->fulfilled = 0;
-        $order[0]->save();
+        $order = Order::find($delivery->order_id);
+        $order->fulfilled = 0;
+        $order->save();
         $delivery->delete();
         return response()->json("delivery deleted");
     }

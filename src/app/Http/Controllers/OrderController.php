@@ -13,10 +13,10 @@ class OrderController extends Controller
     public function index()
     {
         return Order::all()->map(function ($order) {
-            $supplier = Supplier::where('id', $order->supplier_id)->get();
-            $user = User::where('id', $order->user_id)->get();
-            $order->supplier_name = $supplier[0]->name;
-            $order->user_name = $user[0]->username;
+            $supplier = Supplier::find($order->supplier_id);
+            $user = User::find($order->user_id);
+            $order->supplier_name = $supplier->name;
+            $order->user_name = $user->username;
             return $order;
         });
     }
@@ -24,12 +24,12 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return StockOrder::where('order_id', $order->id)->get()->map(function ($stockOrder) {
-            $order = Order::where('id', $stockOrder->order_id)->get();
-            $supplier = Supplier::where('id', $order[0]->supplier_id)->get();
-            $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
-            $stockOrder->supplier_id = $supplier[0]->id;
-            $stockOrder->stock_item_name = $stockItem[0]->name;
-            $stockOrder->notes = $order[0]->notes;
+            $order = Order::find($stockOrder->order_id);
+            $supplier = Supplier::find($order->supplier_id);
+            $stockItem = StockItem::find($stockOrder->stock_item_id);
+            $stockOrder->supplier_id = $supplier->id;
+            $stockOrder->stock_item_name = $stockItem->name;
+            $stockOrder->notes = $order->notes;
             return $stockOrder;
         });
     }

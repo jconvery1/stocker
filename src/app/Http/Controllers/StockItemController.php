@@ -12,8 +12,8 @@ class StockItemController extends Controller
     public function index()
     {
         return StockItem::all()->map(function ($stockitem) {
-            $supplier = Supplier::where('id', $stockitem->supplier_id)->get();
-            $stockitem->supplier_name = $supplier[0]->name;
+            $supplier = Supplier::find($stockitem->supplier_id);
+            $stockitem->supplier_name = $supplier->name;
             return $stockitem;
         });
     }

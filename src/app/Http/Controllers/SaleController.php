@@ -15,20 +15,19 @@ class SaleController extends Controller
     public function index()
     {
         return Sale::all()->map(function ($sale) {
-            $customer = Customer::where('id', $sale->customer_id)->get();
-            $user = User::where('id', $sale->user_id)->get();
-            $sale->customer_name = $customer[0]->forename . ' ' . $customer[0]->surname;
-            $sale->user_name = $user[0]->username;
+            $customer = Customer::find($sale->customer_id);
+            $user = User::find($sale->user_id);
+            $sale->customer_name = $customer->forename . ' ' . $customer->surname;
+            $sale->user_name = $user->username;
             return $sale;
         });
     }
 
     public function show(Sale $sale)
     {
-        // return new SaleResource($sale);
         return StockSale::where('sale_id', $sale->id)->get()->map(function ($stockSale) {
-            $stockItem = StockItem::where('id', $stockSale->stock_item_id)->get();
-            $stockSale->name = $stockItem[0]->name;
+            $stockItem = StockItem::find($stockSale->stock_item_id);
+            $stockSale->name = $stockItem->name;
             return $stockSale;
         });
     }
@@ -42,8 +41,6 @@ class SaleController extends Controller
 
     public function update(StoreSaleRequest $request, Sale $sale)
     {
-        // $sale->update($request->validated());
-        // return response()->json("sale updated");
         $sale->update($request->validated());
         StockSale::updateStockSalesForSale($sale->id, $request->stock_sales);
         return response()->json("sale updated");
