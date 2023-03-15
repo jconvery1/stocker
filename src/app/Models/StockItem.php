@@ -57,18 +57,18 @@ class StockItem extends Model
     public static function updateStockLevelsFromFulfillment($stockOrders)
     {
         foreach($stockOrders as $stockOrder) {
-            $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
-            $stockItem[0]->stock_level += $stockOrder->quantity;
-            $stockItem[0]->save();
+            $stockItem = StockItem::find($stockOrder->stock_item_id);
+            $stockItem->stock_level += $stockOrder->quantity;
+            $stockItem->save();
         }
     }
 
     public static function updateStockLevelsFromDeliveryEdit($stockOrders)
     {
         foreach ($stockOrders as $stockOrder) {
-            $stockItem = StockItem::where('id', $stockOrder->stock_item_id)->get();
-            $stockItem[0]->stock_level -= $stockOrder->quantity;
-            $stockItem[0]->save();
+            $stockItem = StockItem::find($stockOrder->stock_item_id);
+            $stockItem->stock_level -= $stockOrder->quantity;
+            $stockItem->save();
         }
     }
 }

@@ -49,9 +49,9 @@ class StockSale extends Model
             $stockSale->price = $item['price'];
             $stockSale->save();
 
-            $stockItem = StockItem::where('id', $item['stock_item_id'])->get();
-            $stockItem[0]->stock_level -= $item['quantity'];
-            $stockItem[0]->save();
+            $stockItem = StockItem::find($item['stock_item_id']);
+            $stockItem->stock_level -= $item['quantity'];
+            $stockItem->save();
         }
     }
 
@@ -66,8 +66,8 @@ class StockSale extends Model
                 if ($stockSale->stock_item_id == $item['stock_item_id']) {
                     if ($stockSale->quantity != $item['quantity']) {
                         //reverse previous stock sale quantity from stock item
-                        $stockItem = StockItem::where('id', $item['stock_item_id'])->get();
-                        $stockItem[0]->stock_level += $stockSale->quantity;
+                        $stockItem = StockItem::find($item['stock_item_id']);
+                        $stockItem->stock_level += $stockSale->quantity;
 
                         //save stock sale
                         $stockSale->quantity = $item['quantity'];
@@ -75,8 +75,8 @@ class StockSale extends Model
                         $stockSale->save();
 
                         //add new stock sale quantity change to stock item
-                        $stockItem[0]->stock_level -= $stockSale->quantity;
-                        $stockItem[0]->save();
+                        $stockItem->stock_level -= $stockSale->quantity;
+                        $stockItem->save();
                     }
                     $matchFound = true;
                 }
@@ -87,9 +87,9 @@ class StockSale extends Model
                 $stockSale->delete();
 
                 //reset previous stock item
-                $oldStockItem = StockItem::where('id', $stockSale->stock_item_id)->get();
-                $oldStockItem[0]->stock_level += $stockSale->quantity;
-                $oldStockItem[0]->save();
+                $oldStockItem = StockItem::find($stockSale->stock_item_id);
+                $oldStockItem->stock_level += $stockSale->quantity;
+                $oldStockItem->save();
             }
         }
 
@@ -114,9 +114,9 @@ class StockSale extends Model
                 $newStockSale->save();
 
                 //decrease stock level of new stock item
-                $stockItem = StockItem::where('id', $item['stock_item_id'])->get();
-                $stockItem[0]->stock_level -= $item['quantity'];
-                $stockItem[0]->save();
+                $stockItem = StockItem::find($item['stock_item_id']);
+                $stockItem->stock_level -= $item['quantity'];
+                $stockItem->save();
             }
         }
     }
