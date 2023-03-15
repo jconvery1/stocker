@@ -30,7 +30,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="flex mb-6">
+                <div class="flex mb-12">
                     <label for="name"
                         class="block ml-4 w-32 text-sm font-medium text-gray-900"
                     >
@@ -44,13 +44,11 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/6 p-2.5"
                         required
                     >
-                </div>
-                <div class="flex mb-12">
                     <button
                         v-if="stockItemId"
                         @click="addItemToOrder"
                         type="button"
-                        class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto ml-[330px] px-5 py-2.5 text-center"
+                        class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm block w-1/6 p-2.5 ml-[103px] text-center"
                     >
                         Add to order
                     </button>
