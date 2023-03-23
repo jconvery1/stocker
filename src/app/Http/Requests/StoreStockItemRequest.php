@@ -33,7 +33,8 @@ class StoreStockItemRequest extends FormRequest
             'category' => ['required'],
             'stock_level' => ['required'],
             'colour' => ['required'],
-            'price' => ['required']
+            'price' => ['required'],
+            'barcode' => ['required']
         ];
     }
 }

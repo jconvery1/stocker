@@ -27,6 +27,7 @@ class StockItemResource extends JsonResource
             'material' => $this->material,
             'category' => $this->category,
             'stock_level' => $this->stock_level,
+            'barcode' => $this->barcode,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

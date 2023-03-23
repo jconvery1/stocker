@@ -26,6 +26,7 @@ class StockItem extends Model
         'category',
         'stock_level',
         'price',
+        'barcode',
         'created_at',
         'updated_at'
     ];

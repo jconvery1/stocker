@@ -191,6 +191,24 @@
                     <div class="flex my-4" v-if="errors.stock_level">
                         <span class="ml-32 text-sm text-red-400">{{ errors.stock_level[0] }}</span>
                     </div>
+                    <div class="flex" :class="{ 'mb-12': !errors.barcode }">
+                        <label for="name"
+                            class="block w-32 text-sm font-medium text-gray-900"
+                        >
+                            Barcode
+                        </label>
+                        <input
+                            v-model="stockItem.barcode"
+                            type="string"
+                            id="price"
+                            min="1"
+                            step="any"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5"
+                        required>
+                    </div>
+                    <div class="flex my-4" v-if="errors.barcode">
+                        <span class="ml-32 text-sm text-red-400">{{ errors.barcode[0] }}</span>
+                    </div>
                 </div>
             </div>
             <div class="flex justify-end pr-4">

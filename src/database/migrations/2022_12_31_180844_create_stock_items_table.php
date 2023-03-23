@@ -28,6 +28,7 @@ class CreateStockItemsTable extends Migration
             $table->string('category');
             $table->integer('price');
             $table->integer('stock_level');
+            $table->string('barcode');
             $table->timestamps();
         });
     }
