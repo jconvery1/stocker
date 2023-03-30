@@ -34,6 +34,21 @@
                     <label for="name"
                         class="block ml-4 w-32 text-sm font-medium text-gray-900"
                     >
+                        Barcode
+                    </label>
+                    <input
+                        @keyup.enter="addItemToSale(true)"
+                        v-model="barcode"
+                        type="search"
+                        id="barcode"
+                        min="1"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
+                    >
+                </div>
+                <div class="flex mb-12">
+                    <label for="name"
+                        class="block ml-4 w-32 text-sm font-medium text-gray-900"
+                    >
                         Quantity
                     </label>
                     <input
@@ -61,7 +76,7 @@
                 <div class="flex mb-12">
                     <button
                         v-if="stockItemId"
-                        @click="addItemToSale"
+                        @click="addItemToSale(false)"
                         type="button"
                         class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto ml-[330px] px-5 py-2.5 text-center"
                     >
@@ -103,7 +118,7 @@
                                 </td>
                                 <td class="py-4 px-6 space-x-2">
                                     <button
-                                    @click="removeItemFromSale(item)"
+                                        @click="removeItemFromSummary(item)"
                                         class="
                                             px-4
                                             py-2
@@ -111,6 +126,7 @@
                                             hover:bg-red-700
                                             text-white
                                             rounded"
+                                        type="button"
                                     >
                                         Remove
                                     </button>
@@ -173,10 +189,14 @@ export default {
             notes: '',
             stockSale: {},
             sale: [],
+            sale2: [],
             test: 'test',
             errors: {},
             totalQuantity: 0,
-            totalPrice: 0
+            totalPrice: 0,
+            barcode: '',
+            scannedItems: [],
+            stockItems2: []
         }
     },
     mounted() {
@@ -196,10 +216,18 @@ export default {
         }
     },
     methods: {
+        removeItemFromDropdown(item) {
+            console.log('remove item from dropdown');
+            const index = this.stockItems.findIndex((stockItem) => {
+                return stockItem.id === item.id;
+            })
+            this.stockItems.splice(index, 1);
+        },
         getStockItems() {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
                     this.stockItems = response.data;
+                    this.stockItems2 = this.stockItems;
                     this.tableId++;
                 });
         },
@@ -225,32 +253,59 @@ export default {
                 }
             }
         },
-        addItemToSale() {
+        addItemToSale(barcode) {
             //build and add item to sale
-            const item = this.stockItems.find(item => item.id === this.stockItemId || item.stock_item_id === this.stockItemId);
-            const stockSale = {
-                name: item.name,
-                stock_item_id: this.stockItemId,
-                quantity: this.stockQuantity,
-                price: this.price
-            };
-            this.sale.push(stockSale);
+            let item;
+            let stockSale;
+            const foundIndex = this.sale.findIndex(saleItem => saleItem.barcode == this.barcode);
+            if (foundIndex > -1) {
+                console.log(1);
+                const item = this.sale.find(saleItem => saleItem.barcode == this.barcode);
+                this.sale[foundIndex].quantity++;
+                this.sale[foundIndex].price = item.itemPrice * this.sale[foundIndex].quantity;
 
-            //adjust totals
-            this.totalQuantity += Number(this.stockQuantity);
-            this.totalPrice += this.price;
+                //adjust totals
+                this.totalQuantity++;
+                this.totalPrice += item.itemPrice;
+            } else {
+                console.log(2);
+                if (barcode) {
+                    item = this.stockItems.find(item => item.barcode === this.barcode);
+                    stockSale = {
+                        name: item.name,
+                        stock_item_id: item.id,
+                        quantity: 1,
+                        price: item.price,
+                        barcode: item.barcode,
+                        itemPrice: item.price
+                    };
+                } else {
+                    item = this.stockItems.find(item => item.id === this.stockItemId || item.stock_item_id === this.stockItemId);
+                    stockSale = {
+                        name: item.name,
+                        stock_item_id: this.stockItemId,
+                        quantity: this.stockQuantity,
+                        price: this.price,
+                        barcode: item.barcode,
+                        itemPrice: item.price
+                    };
+                }
+                this.sale.push(stockSale);
 
-            //remove added item from item dropdown
-            const index = this.stockItems.findIndex((stockItem) => {
-                return stockItem.id === item.id;
-            })
-            this.stockItems.splice(index, 1);
+                //adjust totals
+                this.totalQuantity += Number(this.stockQuantity);
+                this.totalPrice = barcode ? this.totalPrice += item.price : this.totalPrice += this.price;
+
+                this.removeItemFromDropdown(item);
+            }
 
             //reset form fields
             this.stockItemId = '';
             this.stockQuantity = 1;
+            this.barcode = '';
         },
-        removeItemFromSale(item) {
+        removeItemFromSummary(item) {
+            console.log('remove from summary');
             const index = this.sale.findIndex((stockItem) => {
                 return stockItem.stock_item_id == item.stock_item_id;
             })
@@ -259,6 +314,9 @@ export default {
             //adjust totals
             this.totalQuantity -= item.quantity;
             this.totalPrice -= item.price;
+
+            //reset price to original item price in case the item is scanned again
+            item.price = item.itemPrice;
 
             //add removed item back into item dropdown
             item.id = item.stock_item_id;

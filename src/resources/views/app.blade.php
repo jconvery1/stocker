@@ -16,7 +16,7 @@
                     <ul class="space-y-2">
                         <a class="flex items-center pl-2.5 mb-5">
                             <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Stocker Logo" />
-                            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Stocker</span>
+                            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">stocker</span>
                         </a>
                         <li>
                             <router-link to="/" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
