@@ -34,6 +34,21 @@
                     <label for="name"
                         class="block ml-4 w-32 text-sm font-medium text-gray-900"
                     >
+                        Barcode
+                    </label>
+                    <input
+                        @keyup.enter="addItemToOrder(true)"
+                        v-model="barcode"
+                        type="search"
+                        id="barcode"
+                        min="1"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
+                    >
+                </div>
+                <div class="flex mb-12">
+                    <label for="name"
+                        class="block ml-4 w-32 text-sm font-medium text-gray-900"
+                    >
                         Quantity
                     </label>
                     <input
@@ -46,7 +61,7 @@
                     >
                     <button
                         v-if="stockItemId"
-                        @click="addItemToOrder"
+                        @click="addItemToOrder(false)"
                         type="button"
                         class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm block w-1/6 p-2.5 ml-[103px] text-center"
                     >
@@ -90,14 +105,15 @@
                                 </td>
                                 <td class="py-4 px-6 space-x-2">
                                     <button
-                                    @click="removeItemFromOrder(item)"
-                                        class="
-                                            px-4
-                                            py-2
-                                            bg-red-500
-                                            hover:bg-red-700
-                                            text-white
-                                            rounded"
+                                        @click="removeItemFromOrder(item)"
+                                            class="
+                                                px-4
+                                                py-2
+                                                bg-red-500
+                                                hover:bg-red-700
+                                                text-white
+                                                rounded"
+                                        type="button"
                                     >
                                         Remove
                                     </button>
@@ -156,7 +172,8 @@ export default {
             stockOrder: {},
             order: [],
             test: 'test',
-            errors: {}
+            errors: {},
+            barcode: null
         }
     },
     mounted() {
@@ -203,27 +220,47 @@ export default {
                 }
             }
         },
-        addItemToOrder() {
+        addItemToOrder(barcode) {
             //build and add item to order
-            const item = this.stockItems.find(item => item.id === this.stockItemId || item.stock_item_id === this.stockItemId);
-            const stockOrder = {
-                stock_item_id: this.stockItemId,
-                quantity: this.stockQuantity,
-                name: item.name,
-                supplier_id: item.supplier_id
-            };
-            this.order.push(stockOrder);
+            let item;
+            let stockOrder;
+            const foundIndex = this.order.findIndex(orderItem => orderItem.barcode == this.barcode);
+            if (foundIndex > -1) {
+                this.order[foundIndex].quantity++;
+            } else {
+                if (barcode) {
+                    item = this.stockItems.find(item => item.barcode === this.barcode);
+                    stockOrder = {
+                        stock_item_id: item.id,
+                        quantity: 1,
+                        name: item.name,
+                        supplier_id: item.supplier_id,
+                        barcode: item.barcode
+                    };
+                } else {
+                    item = this.stockItems.find(item => item.id === this.stockItemId || item.stock_item_id === this.stockItemId);
+                    stockOrder = {
+                        stock_item_id: this.stockItemId,
+                        quantity: this.stockQuantity,
+                        name: item.name,
+                        supplier_id: item.supplier_id,
+                        barcode: item.barcode
+                    };
+                }
+                this.order.push(stockOrder);
 
-            //remove added item from item dropdown
-            const index = this.stockItems.findIndex((stockItem) => {
-                return stockItem.id === item.id;
-            })
-            this.stockItems.splice(index, 1);
+                //remove added item from item dropdown
+                const index = this.stockItems.findIndex((stockItem) => {
+                    return stockItem.id === item.id;
+                })
+                this.stockItems.splice(index, 1);
 
-            //only show stock that belongs to the same supplier
-            this.stockItems = this.stockItems.filter((stockItem) => {
-                return stockItem.supplier_id == item.supplier_id;
-            })
+                //only show stock that belongs to the same supplier
+                this.stockItems = this.stockItems.filter((stockItem) => {
+                    return stockItem.supplier_id == item.supplier_id;
+                })
+            }
+            this.barcode = '';
 
             //reset form fields
             this.stockItemId = '';

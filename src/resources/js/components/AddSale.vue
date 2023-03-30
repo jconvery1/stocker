@@ -217,7 +217,6 @@ export default {
     },
     methods: {
         removeItemFromDropdown(item) {
-            console.log('remove item from dropdown');
             const index = this.stockItems.findIndex((stockItem) => {
                 return stockItem.id === item.id;
             })
@@ -259,7 +258,6 @@ export default {
             let stockSale;
             const foundIndex = this.sale.findIndex(saleItem => saleItem.barcode == this.barcode);
             if (foundIndex > -1) {
-                console.log(1);
                 const item = this.sale.find(saleItem => saleItem.barcode == this.barcode);
                 this.sale[foundIndex].quantity++;
                 this.sale[foundIndex].price = item.itemPrice * this.sale[foundIndex].quantity;
@@ -268,7 +266,6 @@ export default {
                 this.totalQuantity++;
                 this.totalPrice += item.itemPrice;
             } else {
-                console.log(2);
                 if (barcode) {
                     item = this.stockItems.find(item => item.barcode === this.barcode);
                     stockSale = {
@@ -305,7 +302,6 @@ export default {
             this.barcode = '';
         },
         removeItemFromSummary(item) {
-            console.log('remove from summary');
             const index = this.sale.findIndex((stockItem) => {
                 return stockItem.stock_item_id == item.stock_item_id;
             })

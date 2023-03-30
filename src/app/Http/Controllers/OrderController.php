@@ -29,6 +29,7 @@ class OrderController extends Controller
             $stockItem = StockItem::find($stockOrder->stock_item_id);
             $stockOrder->supplier_id = $supplier->id;
             $stockOrder->stock_item_name = $stockItem->name;
+            $stockOrder->barcode = $stockItem->barcode;
             $stockOrder->notes = $order->notes;
             return $stockOrder;
         });

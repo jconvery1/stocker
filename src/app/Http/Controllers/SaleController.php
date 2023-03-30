@@ -28,6 +28,7 @@ class SaleController extends Controller
         return StockSale::where('sale_id', $sale->id)->get()->map(function ($stockSale) {
             $stockItem = StockItem::find($stockSale->stock_item_id);
             $stockSale->name = $stockItem->name;
+            $stockSale->barcode = $stockItem->barcode;
             return $stockSale;
         });
     }
