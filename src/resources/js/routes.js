@@ -1,4 +1,3 @@
-import Dashboard from './components/Dashboard.vue';
 import Stock from './components/Stock.vue';
 import Orders from "./components/Orders.vue";
 import Sales from "./components/Sales.vue";
@@ -17,8 +16,8 @@ export default {
     routes: [
         {
             path: "/",
-            name: "Dashboard",
-            component: Dashboard,
+            name: "Stock",
+            component: Stock,
         },
         {
             path: "/stock",
