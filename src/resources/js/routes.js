@@ -2,6 +2,9 @@ import Stock from './components/Stock.vue';
 import Orders from "./components/Orders.vue";
 import Sales from "./components/Sales.vue";
 import Deliveries from "./components/Deliveries.vue";
+import Suppliers from "./components/Suppliers.vue";
+import AddSupplier from "./components/AddSupplier.vue";
+import EditSupplier from "./components/EditSupplier.vue";
 import AddStockItem from "./components/AddStockItem.vue";
 import EditStockItem from "./components/EditStockItem.vue";
 import AddOrder from "./components/AddOrder.vue";
@@ -82,6 +85,22 @@ export default {
             path: "/deliveries/edit/:id",
             name: "EditDelivery",
             component: EditDelivery,
+            props: true,
+        },
+        {
+            path: "/suppliers",
+            name: "Suppliers",
+            component: Suppliers,
+        },
+        {
+            path: "/suppliers/add",
+            name: "AddSupplier",
+            component: AddSupplier,
+        },
+        {
+            path: "/suppliers/edit/:id",
+            name: "EditSupplier",
+            component: EditSupplier,
             props: true,
         },
     ],
