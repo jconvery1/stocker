@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/sign-in', function () {
-    return view('signIn');
-});
+//sign in routes
+Route::get('/sign-in', [CustomAuthController::class, 'signIn'])->name('sign-in');
+Route::post('/sign-in', [UserController::class, 'signIn'])->name('sign-in');
+Route::get('/create-account', [CustomAuthController::class, 'create']);
+Route::post('/create-account', [UserController::class, 'store'])->name('create-account');
 
 Route::get('/{any?}', function () {
     return view('app');

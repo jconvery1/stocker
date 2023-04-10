@@ -19,27 +19,23 @@
                                 <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </div>
-                        <form class="mt-8 space-y-6" action="#" method="POST">
+                        <form class="mt-8 space-y-6" action="{{route('sign-in')}}" method="POST">
+                            @csrf
+                            @if(Session::has('success'))
+                            <span class="flex items-center justify-center" style="color: red">{{Session::get('success')}}</span>
+                            @endif
+                            @if(Session::has('fail'))
+                            <span class="flex items-center justify-center" style="color: red">{{Session::get('fail')}}</span>
+                            @endif
                             <input type="hidden" name="remember" value="true">
                             <div class="-space-y-px rounded-md shadow-sm">
                                 <div>
-                                    <label for="email-address" class="sr-only">Email address</label>
-                                    <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
+                                    <label for="username" class="sr-only">Username</label>
+                                    <input id="username" name="username" type="text" autocomplete="username" required class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Username">
                                 </div>
                                 <div>
                                     <label for="password" class="sr-only">Password</label>
                                     <input id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                    <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
-                                </div>
-
-                                <div class="text-sm">
-                                    <a href="#" class="font-medium text-blue-700 hover:text-blue-800">Forgot your password?</a>
                                 </div>
                             </div>
 
@@ -52,6 +48,12 @@
                                     </span>
                                     Sign in
                                 </button>
+                            </div>
+
+                            <div class="flex items-center justify-center">
+                                <div class="text-sm">
+                                    <a href="create-account" class="font-medium text-blue-700 hover:text-blue-800">I don't have an account</a>
+                                </div>
                             </div>
                         </form>
                     </div>
