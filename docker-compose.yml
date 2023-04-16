@@ -26,14 +26,6 @@ services:
       - MYSQL_DATABASE=project
       - MYSQL_ROOT_PASSWORD=password
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    ports:
-      - "3400:80"
-    depends_on:
-      - db
-
   app:
     container_name: project
     build: 
