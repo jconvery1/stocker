@@ -16,8 +16,9 @@ use App\Http\Controllers\UserController;
 */
 
 //sign in routes
-Route::get('/sign-in', [CustomAuthController::class, 'signIn'])->name('sign-in');
+Route::get('/sign-in', [UserController::class, 'signInScreen'])->name('sign-in');
 Route::post('/sign-in', [UserController::class, 'signIn'])->name('sign-in');
+Route::get('/sign-out', [UserController::class, 'signOut'])->name('sign-out');
 Route::get('/create-account', [CustomAuthController::class, 'create']);
 Route::post('/create-account', [UserController::class, 'store'])->name('create-account');
 

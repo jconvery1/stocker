@@ -5,6 +5,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -40,24 +41,39 @@ class UserController extends Controller
         }
     }
 
+    public function signInScreen() {
+        return view('signIn');
+    }
+
     public function signIn(Request $request)
     {
-        $request->validate([
-            'username' => ['required'],
-            'password' => ['required']
-        ]);
-        $user = User::where('username', $request->username)->get();
-        if (count($user) > 0) {
-            $password = Hash::make($user[0]->password);
-            if (Hash::check($request->password, $password)) {
-                $request->session()->put('loginId', $user[0]->id);
-                return redirect('/stock');
-            } else {
-                return back()->with('fail', 'Username and password do not match');
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $user = User::where('username', '=', $username)->first();
+        if ($user && $request->password == $password) {
+            Auth::login($user);
+            if (Auth::check()) {
+                return view('/stock');
             }
-        } else {
-            return back()->with('fail', 'Username not found');
         }
+        return back()->withErrors([
+            'username' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+    /**
+     * Log the user out of the application.
+     */
+    public function signOut(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return view('signIn');
     }
 
     public function update(StoreUserRequest $request, User $user)
