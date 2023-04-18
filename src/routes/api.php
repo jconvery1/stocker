@@ -40,8 +40,3 @@ Route::apiResource('suppliers', SupplierController::class);
 Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
 Route::post('orders/fulfill_order/{order}', [OrderController::class, 'fulfillOrder']);
 Route::get('email', [MailController::class, 'sendMail']);
-
-//sign in routes
-Route::get('/sign-in', [CustomAuthController::class, 'signIn']);
-Route::get('/create-account', [CustomAuthController::class, 'create']);
-Route::post('/create-account', [CustomAuthController::class, 'createAccount'])->name('create-account');

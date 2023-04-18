@@ -54,7 +54,7 @@ class UserController extends Controller
         if ($user && $request->password == $password) {
             Auth::login($user);
             if (Auth::check()) {
-                return view('/stock');
+                return redirect('/stock');
             }
         }
         return back()->withErrors([
