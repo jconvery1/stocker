@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('job_title')->nullable();
             $table->timestamps();
         });
     }

@@ -24,4 +24,4 @@ Route::post('/create-account', [UserController::class, 'store'])->name('create-a
 
 Route::get('/{any?}', function () {
     return view('app');
-});
+})->middleware('auth');
