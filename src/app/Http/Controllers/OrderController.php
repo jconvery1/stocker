@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreOrderRequest;
+use App\Mail\OrderStock;
 use App\Models\Order;
 use App\Models\StockItem;
 use App\Models\StockOrder;
@@ -39,6 +42,7 @@ class OrderController extends Controller
     {
         $order = Order::create($request->validated());
         StockOrder::createStockOrderFromOrder($order->id, $request->stock_orders);
+        Mail::to('convery-j2@ulster.ac.uk')->send(new OrderStock($order));
         return response()->json("order created!");
     }
 
