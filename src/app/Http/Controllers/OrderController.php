@@ -42,7 +42,13 @@ class OrderController extends Controller
     {
         $order = Order::create($request->validated());
         StockOrder::createStockOrderFromOrder($order->id, $request->stock_orders);
-        Mail::to('convery-j2@ulster.ac.uk')->send(new OrderStock($order));
+        $stockOrders = StockOrder::where('order_id', $order->id)->get();
+        foreach($stockOrders as $stockOrder) {
+            $stockItem = StockItem::find($stockOrder->stock_item_id);
+            $stockOrder->item_name = $stockItem->name;
+        }
+        $supplier = Supplier::find($order->supplier_id);
+        Mail::to($supplier->email)->send(new OrderStock($order, $stockOrders));
         return response()->json("order created!");
     }
 

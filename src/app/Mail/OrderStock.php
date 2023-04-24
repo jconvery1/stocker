@@ -10,6 +10,7 @@ class OrderStock extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $stockOrders;
     public $order;
 
     /**
@@ -17,8 +18,9 @@ class OrderStock extends Mailable
      *
      * @return void
      */
-    public function __construct($order) {
+    public function __construct($order, $stockOrders) {
         $this->order = $order;
+        $this->stockOrders = $stockOrders;
     }
 
     /**

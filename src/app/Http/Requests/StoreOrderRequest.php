@@ -26,7 +26,8 @@ class StoreOrderRequest extends FormRequest
         return [
             'user_id' => ['required'],
             'supplier_id' => ['required'],
-            'order_datetime' => ['required']
+            'order_datetime' => ['required'],
+            'notes' => ['nullable']
         ];
     }
 }
