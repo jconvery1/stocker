@@ -3,6 +3,7 @@ import Orders from "./components/Orders.vue";
 import Sales from "./components/Sales.vue";
 import Deliveries from "./components/Deliveries.vue";
 import Suppliers from "./components/Suppliers.vue";
+import Settings from "./components/Settings.vue";
 import AddSupplier from "./components/AddSupplier.vue";
 import EditSupplier from "./components/EditSupplier.vue";
 import AddStockItem from "./components/AddStockItem.vue";
@@ -102,6 +103,11 @@ export default {
             name: "EditSupplier",
             component: EditSupplier,
             props: true,
+        },
+        {
+            path: "/settings",
+            name: "Settings",
+            component: Settings,
         },
     ],
 };
