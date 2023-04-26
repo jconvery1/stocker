@@ -14,6 +14,10 @@ import AddSale from "./components/AddSale.vue";
 import EditSale from "./components/EditSale.vue";
 import AddDelivery from "./components/AddDelivery.vue";
 import EditDelivery from "./components/EditDelivery.vue";
+import Brands from "./components/Brands.vue";
+import Categories from "./components/Categories.vue";
+import Materials from "./components/Materials.vue";
+import AutomatedReordering from "./components/AutomatedReordering.vue";
 
 export default {
     mode: "history",
@@ -108,6 +112,26 @@ export default {
             path: "/settings",
             name: "Settings",
             component: Settings,
+        },
+        {
+            path: "/brands",
+            name: "Brands",
+            component: Brands,
+        },
+        {
+            path: "/categories",
+            name: "Categories",
+            component: Categories,
+        },
+        {
+            path: "/materials",
+            name: "Materials",
+            component: Materials,
+        },
+        {
+            path: "/automation",
+            name: "AutomatedReordering",
+            component: AutomatedReordering,
         },
     ],
 };
