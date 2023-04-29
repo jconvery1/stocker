@@ -11,7 +11,7 @@ use App\Http\Controllers\StockItemController;
 use App\Http\Controllers\StockOrderController;
 use App\Http\Controllers\StockSaleController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\AutomationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,8 +35,10 @@ Route::apiResource('stockitems', StockItemController::class);
 Route::apiResource('stockorders', StockOrderController::class);
 Route::apiResource('stocksales', StockSaleController::class);
 Route::apiResource('suppliers', SupplierController::class);
+Route::apiResource('automation', AutomationController::class);
 
 //custom API routes
 Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
+// Route::post('automation/{settings}', AutomationController::class);
 Route::post('orders/fulfill_order/{order}', [OrderController::class, 'fulfillOrder']);
 Route::get('email', [MailController::class, 'sendMail']);

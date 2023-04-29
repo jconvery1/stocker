@@ -107,9 +107,21 @@ export default {
         }
     },
     methods: {
-        saveSettings() {
-            return;
-        }
+        async saveSettings() {
+            try {
+                const settings = {
+                    reorder_level: this.reorderLevel,
+                    reorder_amount: this.reorderAmount,
+                    enabled: this.enabled
+                }
+                await axios.post("http://127.0.0.1:8080/api/automation", settings)
+                await this.$router.push({path: '/settings'})
+            } catch (error) {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
+            }
+        },
     }
 }
 </script>
