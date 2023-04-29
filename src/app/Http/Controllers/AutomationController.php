@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AutomationResource;
 use App\Models\Automation;
 use Illuminate\Http\Request;
 
 class AutomationController extends Controller
 {
+    public function show(Automation $automation)
+    {
+        return new AutomationResource($automation);
+    }
+
     public function store(Request $settings)
     {
         $currentSettings = Automation::find(1);

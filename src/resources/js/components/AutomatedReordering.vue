@@ -12,7 +12,7 @@
             Cancel
         </button>
     </div>
-    <div class="relative mt-5 m-2 p-2">
+    <div v-if="this.dataFetched" class="relative mt-5 m-2 p-2">
         <form>
             <div class="grid grid-cols-2">
                 <div>
@@ -24,7 +24,7 @@
                             Enabled
                         </label>
                         <label class="switch">
-                        <input type="checkbox" v-model="enabled">
+                        <input type="checkbox" v-model="settings.enabled">
                         <span class="slider round"></span>
                         </label>
                     </div>
@@ -42,9 +42,9 @@
                             </label>
                         </div>
                         <input
-                            v-model="reorderLevel"
+                            v-model="settings.reorder_level"
                             type="number"
-                            :disabled="!enabled"
+                            :disabled="!settings.enabled"
                             min="1"
                             step="any"
                             id="name"
@@ -65,9 +65,9 @@
                             </label>
                         </div>
                         <input
-                            v-model="reorderAmount"
+                            v-model="settings.reorder_amount"
                             type="number"
-                            :disabled="!enabled"
+                            :disabled="!settings.enabled"
                             min="1"
                             step="any"
                             id="name"
@@ -87,6 +87,12 @@
             </div>
         </form>
     </div>
+    <div v-else class="grid min-h-screen place-content-center">
+        <div class="flex items-center gap-2 text-gray-500">
+        <span class="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
+        loading...
+        </div>
+    </div>
 </div>
 </template>
 
@@ -96,25 +102,24 @@ export default {
     data() {
         return {
             enabled: false,
-            reorderLevel: 0,
-            reorderAmount: 0
+            settings: null,
+            dataFetched: false
         }
     },
-    watch: {
-        enabled() {
-            this.reorderLevel = 0;
-            this.reorderAmount = 0;
-        }
+    mounted() {
+        this.getSettings();
     },
     methods: {
+        getSettings() {
+            axios.get("http://127.0.0.1:8080/api/automation/1")
+                .then((response) => {
+                    this.settings = response.data.data;
+                    this.dataFetched = true;
+            });
+        },
         async saveSettings() {
             try {
-                const settings = {
-                    reorder_level: this.reorderLevel,
-                    reorder_amount: this.reorderAmount,
-                    enabled: this.enabled
-                }
-                await axios.post("http://127.0.0.1:8080/api/automation", settings)
+                await axios.post("http://127.0.0.1:8080/api/automation", this.settings)
                 await this.$router.push({path: '/settings'})
             } catch (error) {
                 if (error.response.status === 422) {
