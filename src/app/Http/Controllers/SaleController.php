@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Resources\SaleResource;
+use App\Models\Automation;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\Sale;
 use App\Models\StockItem;
+use App\Models\StockOrder;
 use App\Models\StockSale;
 
 class SaleController extends Controller
@@ -37,6 +39,17 @@ class SaleController extends Controller
     {
         $sale = Sale::create($request->validated());
         StockSale::createStockSaleFromSale($sale->id, $request->stock_sales);
+        $stockSales = StockSale::where('sale_id', $sale->id)->get();
+        $settings = Automation::find(1);
+        if ($settings->enabled) {
+            foreach ($stockSales as $stockSale) {
+                $item = StockItem::find($stockSale->stock_item_id);
+                $stockLevel = $item->stock_level;
+                if ($stockLevel <= $settings->reorder_level) {
+                    Automation::reorder($item, $settings->reorder_amount, $sale);
+                }
+            }
+        }
         return response()->json("sale created!");
     }
 
