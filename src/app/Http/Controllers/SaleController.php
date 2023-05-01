@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSaleRequest;
 use App\Http\Resources\SaleResource;
 use App\Models\Automation;
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Sale;
 use App\Models\StockItem;
@@ -44,8 +45,9 @@ class SaleController extends Controller
         if ($settings->enabled) {
             foreach ($stockSales as $stockSale) {
                 $item = StockItem::find($stockSale->stock_item_id);
+                $existingOrder = Order::where([['notes', "Automated Reorder: $item->name"], ['fulfilled', 0]])->get();
                 $stockLevel = $item->stock_level;
-                if ($stockLevel <= $settings->reorder_level) {
+                if ($stockLevel <= $settings->reorder_level && count($existingOrder) == 0) {
                     Automation::reorder($item, $settings->reorder_amount, $settings->reorder_level, $sale);
                 }
             }

@@ -28,7 +28,7 @@ class Automation extends Model
 
     public static function reorder($item, $amount, $level, $sale) {
         $order = new Order();
-        $order->notes = "Automated Reorder";
+        $order->notes = "Automated Reorder: $item->name";
         $order->user_id = 1;
         $order->supplier_id = $item->supplier_id;
         $order->fulfilled = 0;
