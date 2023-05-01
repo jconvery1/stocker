@@ -12,7 +12,7 @@
     <div class="relative overflow-x-auto">
         <table
             id="tableId"
-            v-if="this.stockItems !== null"
+            v-if="(this.stockItems && this.settings) !== null"
             class="w-full text-sm text-left text-gray-500"
         >
             <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
@@ -124,7 +124,7 @@
                             <div>
                                 {{ stockItem.stock_level }}
                             </div>
-                            <div>
+                            <div v-if="stockItem.stock_level <= settings.reorder_level">
                                 <svg aria-hidden="true" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ml-1" fill="red" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path clip-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" fill-rule="evenodd"></path>
                                 </svg>
@@ -198,13 +198,22 @@ export default {
         return {
             stockItems: null,
             tableId: 1,
-            selectAll: false
+            selectAll: false,
+            settings: null
         }
     },
     mounted() {
         this.getStockItems();
+        this.getSettings();
     },
     methods: {
+        getSettings() {
+            axios.get("http://127.0.0.1:8080/api/automation/1")
+                .then((response) => {
+                    this.settings = response.data.data;
+                    // this.dataFetched = true;
+            });
+        },
         getStockItems() {
             axios.get("http://127.0.0.1:8080/api/stockitems")
                 .then((response) => {
