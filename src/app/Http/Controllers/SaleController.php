@@ -46,7 +46,7 @@ class SaleController extends Controller
                 $item = StockItem::find($stockSale->stock_item_id);
                 $stockLevel = $item->stock_level;
                 if ($stockLevel <= $settings->reorder_level) {
-                    Automation::reorder($item, $settings->reorder_amount, $sale);
+                    Automation::reorder($item, $settings->reorder_amount, $settings->reorder_level, $sale);
                 }
             }
         }

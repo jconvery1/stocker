@@ -26,22 +26,29 @@ class Automation extends Model
         'updated_at'
     ];
 
-    public static function reorder($item, $amount, $sale) {
+    public static function reorder($item, $amount, $level, $sale) {
         $order = new Order();
         $order->notes = "Automated Reorder";
         $order->user_id = 1;
         $order->supplier_id = $item->supplier_id;
         $order->fulfilled = 0;
-        $order->order_datetime = substr($sale->created_at, -1, 3);
+        $order->order_datetime = substr($sale->created_at, 0, 16);
         $order->save();
 
         $stockOrder = new StockOrder();
         $stockOrder->order_id = $order->id;
         $stockOrder->stock_item_id = $item->id;
         $stockOrder->quantity = $amount;
+        // $stockOrder->quantity = $level - $item->stock_level;
         $stockOrder->save();
 
+        $stockOrders = StockOrder::where('order_id', $order->id)->get();
+        foreach ($stockOrders as $stockOrder) {
+            $stockItem = StockItem::find($stockOrder->stock_item_id);
+            $stockOrder->item_name = $stockItem->name;
+        }
+
         $supplier = Supplier::find($order->supplier_id);
-        Mail::to($supplier->email)->send(new OrderStock($order, $stockOrder));
+        Mail::to($supplier->email)->send(new OrderStock($order, $stockOrders));
     }
 }
