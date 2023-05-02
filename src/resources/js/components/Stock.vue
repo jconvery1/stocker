@@ -243,7 +243,7 @@ export default {
     },
     methods: {
         itemHasUnfulfilledOrder(item) {
-            return this.orders.filter((order) => order.notes == "Automated Reorder: " + item.name).length > 0;
+            return this.orders.data.filter((order) => order.notes == "Automated Reorder: " + item.name).length > 0;
         },
         getSettings() {
             axios.get("http://127.0.0.1:8080/api/automation/1")
@@ -263,8 +263,8 @@ export default {
         getOrders() {
             axios.get("http://127.0.0.1:8080/api/orders")
                 .then((response) => {
-                    this.orders = response.data;
-                    this.orders = this.orders.filter((order) =>
+                    this.orders = Object.assign({}, response.data);
+                    this.orders.data = this.orders.data.filter((order) =>
                         order.fulfilled == 0 && order.notes.includes('Automated Reorder')
                     )
                 });

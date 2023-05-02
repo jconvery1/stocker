@@ -15,13 +15,23 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return Order::all()->map(function ($order) {
+        // return Order::all()->map(function ($order) {
+        //     $supplier = Supplier::find($order->supplier_id);
+        //     $user = User::find($order->user_id);
+        //     $order->supplier_name = $supplier->name;
+        //     $order->user_name = $user->username;
+        //     return $order;
+        // });
+        $orders = Order::paginate(10);
+
+        foreach ($orders as $order) {
             $supplier = Supplier::find($order->supplier_id);
             $user = User::find($order->user_id);
             $order->supplier_name = $supplier->name;
             $order->user_name = $user->username;
-            return $order;
-        });
+        }
+
+        return $orders;
     }
 
     public function show(Order $order)
