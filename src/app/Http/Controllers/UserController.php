@@ -57,9 +57,7 @@ class UserController extends Controller
                 return redirect('/stock');
             }
         }
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->with('fail', 'No account found for these credentials!');
     }
 
     /**

@@ -23,8 +23,7 @@
                             @csrf
                             @if(Session::has('success'))
                             <span class="flex items-center justify-center" style="color: red">{{Session::get('success')}}</span>
-                            @endif
-                            @if(Session::has('fail'))
+                            @else
                             <span class="flex items-center justify-center" style="color: red">{{Session::get('fail')}}</span>
                             @endif
                             <input type="hidden" name="remember" value="true">
