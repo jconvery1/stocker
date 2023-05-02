@@ -14,11 +14,14 @@ class DeliveryController extends Controller
 {
     public function index()
     {
-        return Delivery::all()->map(function ($delivery) {
+        $deliveries = Delivery::paginate(10);
+
+        foreach ($deliveries as $delivery) {
             $user = User::find($delivery->user_id);
             $delivery->user_name = $user->username;
-            return $delivery;
-        });
+        }
+
+        return $deliveries;
     }
 
     public function show(Delivery $delivery)

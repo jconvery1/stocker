@@ -17,13 +17,16 @@ class SaleController extends Controller
 {
     public function index()
     {
-        return Sale::all()->map(function ($sale) {
+        $sales = Sale::paginate(10);
+
+        foreach ($sales as $sale) {
             $customer = Customer::find($sale->customer_id);
             $user = User::find($sale->user_id);
             $sale->customer_name = $customer->forename . ' ' . $customer->surname;
             $sale->user_name = $user->username;
-            return $sale;
-        });
+        }
+
+        return $sales;
     }
 
     public function show(Sale $sale)

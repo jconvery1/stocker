@@ -39,6 +39,8 @@ Route::apiResource('automation', AutomationController::class);
 
 //custom API routes
 Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
-// Route::post('automation/{settings}', AutomationController::class);
 Route::post('orders/fulfill_order/{order}', [OrderController::class, 'fulfillOrder']);
+Route::get('order_dropdown', [OrderController::class, 'orderDropdown']);
+Route::get('stock_dropdown', [StockItemController::class, 'stockDropdown']);
+Route::get('supplier_dropdown', [SupplierController::class, 'supplierDropdown']);
 Route::get('email', [MailController::class, 'sendMail']);

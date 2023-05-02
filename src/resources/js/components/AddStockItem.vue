@@ -334,9 +334,9 @@ export default {
             }
         },
         getSuppliers() {
-            axios.get("http://127.0.0.1:8080/api/suppliers")
+            axios.get("http://127.0.0.1:8080/api/supplier_dropdown")
                 .then((response) => {
-                    this.suppliers = response.data.data;
+                    this.suppliers = response.data;
                 });
         },
         getDropdowns() {

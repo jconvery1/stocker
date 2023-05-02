@@ -21,6 +21,18 @@ class StockItemController extends Controller
         return $stockitems;
     }
 
+    public function stockDropdown()
+    {
+        $stockitems = StockItem::all();
+
+        foreach ($stockitems as $stockitem) {
+            $supplier = Supplier::find($stockitem->supplier_id);
+            $stockitem->supplier_name = $supplier->name;
+        }
+
+        return $stockitems;
+    }
+
     public function show(StockItem $stockitem)
     {
         return new StockItemResource($stockitem);

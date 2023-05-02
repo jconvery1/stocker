@@ -223,7 +223,7 @@ export default {
             this.stockItems.splice(index, 1);
         },
         getStockItems() {
-            axios.get("http://127.0.0.1:8080/api/stockitems")
+            axios.get("http://127.0.0.1:8080/api/stock_dropdown")
                 .then((response) => {
                     this.stockItems = response.data;
                     this.stockItems2 = this.stockItems;

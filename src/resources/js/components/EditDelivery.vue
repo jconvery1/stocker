@@ -118,7 +118,7 @@ export default {
     },
     methods: {
         getOrders() {
-            axios.get("http://127.0.0.1:8080/api/orders")
+            axios.get("http://127.0.0.1:8080/api/order_dropdown")
                 .then((response) => {
                     this.orders = response.data;
                     this.orders = this.orders.filter((order) => order.fulfilled == 0);

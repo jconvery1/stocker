@@ -10,7 +10,12 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        return SupplierResource::collection(Supplier::all());
+        return Supplier::paginate(10);
+    }
+
+    public function supplierDropdown()
+    {
+        return Supplier::all();
     }
 
     public function show(Supplier $supplier)
