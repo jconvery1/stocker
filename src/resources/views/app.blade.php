@@ -10,7 +10,7 @@
 
 <body>
     <div id="app">
-        <main class="flex h-screen">
+        <main class="flex h-full">
             <aside class="w-40" aria-label="Sidebar">
                 <div class="flex h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                     <ul class="space-y-2">

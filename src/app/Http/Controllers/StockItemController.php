@@ -11,11 +11,14 @@ class StockItemController extends Controller
 {
     public function index()
     {
-        return StockItem::all()->map(function ($stockitem) {
+        $stockitems = StockItem::paginate(10);
+
+        foreach ($stockitems as $stockitem) {
             $supplier = Supplier::find($stockitem->supplier_id);
             $stockitem->supplier_name = $supplier->name;
-            return $stockitem;
-        });
+        }
+
+        return $stockitems;
     }
 
     public function show(StockItem $stockitem)
