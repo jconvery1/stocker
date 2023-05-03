@@ -29,6 +29,20 @@ class SaleController extends Controller
         return $sales;
     }
 
+    public function allSales()
+    {
+        $sales = Sale::all();
+
+        foreach ($sales as $sale) {
+            $customer = Customer::find($sale->customer_id);
+            $user = User::find($sale->user_id);
+            $sale->customer_name = $customer->forename . ' ' . $customer->surname;
+            $sale->user_name = $user->username;
+        }
+
+        return $sales;
+    }
+
     public function show(Sale $sale)
     {
         return StockSale::where('sale_id', $sale->id)->get()->map(function ($stockSale) {

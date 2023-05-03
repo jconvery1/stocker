@@ -11,6 +11,15 @@
     </div>
     <div class="relative overflow-x-auto">
         <div v-if="this.orders !== null">
+            <div class="p-2 bg-white">
+                <label for="table-search" class="sr-only">Search</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <input v-model="search" type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search by order number">
+                </div>
+            </div>
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 border uppercase bg-blue-50">
                     <tr>
@@ -58,7 +67,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="order in orders.data" :key="order.id" class="bg-white border-b hover:bg-gray-50">
+                    <tr v-for="order in filteredResults" :key="order.id" class="bg-white border-b hover:bg-gray-50">
                         <td class="pl-6 py-4">
                             <div class="flex items-center">
                                 <input
@@ -175,17 +184,34 @@ export default {
     data() {
         return {
             orders: null,
-            selectAll: false
+            selectAll: false,
+            search: null,
+            allOrders: null
         }
     },
     mounted() {
         this.getOrders();
+        this.getAllOrders();
+    },
+    computed: {
+        filteredResults() {
+            if (!this.search) {
+                return this.orders.data;
+            }
+            return this.allOrders.filter((order) => order.id.toString().includes(this.search));
+        }
     },
     methods: {
         getOrders(page = 1) {
             axios.get(`http://127.0.0.1:8080/api/orders?page=${page}`)
                 .then((response) => {
                     this.orders = Object.assign({}, response.data);
+                });
+        },
+        getAllOrders() {
+            axios.get(`http://127.0.0.1:8080/api/order_dropdown`)
+                .then((response) => {
+                    this.allOrders = response.data;
                 });
         },
         async deleteOrder(order) {

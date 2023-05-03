@@ -29,14 +29,6 @@ class OrderController extends Controller
 
     public function orderDropdown()
     {
-        // return Order::all()->map(function ($order) {
-        //     $supplier = Supplier::find($order->supplier_id);
-        //     $user = User::find($order->user_id);
-        //     $order->supplier_name = $supplier->name;
-        //     $order->user_name = $user->username;
-        //     return $order;
-        // });
-
         $orders = Order::all();
 
         foreach ($orders as $order) {

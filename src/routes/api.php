@@ -42,5 +42,7 @@ Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDr
 Route::post('orders/fulfill_order/{order}', [OrderController::class, 'fulfillOrder']);
 Route::get('order_dropdown', [OrderController::class, 'orderDropdown']);
 Route::get('stock_dropdown', [StockItemController::class, 'stockDropdown']);
+Route::get('all_sales', [SaleController::class, 'allSales']);
+Route::get('all_deliveries', [DeliveryController::class, 'allDeliveries']);
 Route::get('supplier_dropdown', [SupplierController::class, 'supplierDropdown']);
 Route::get('email', [MailController::class, 'sendMail']);

@@ -24,6 +24,18 @@ class DeliveryController extends Controller
         return $deliveries;
     }
 
+    public function allDeliveries()
+    {
+        $deliveries = Delivery::all();
+
+        foreach ($deliveries as $delivery) {
+            $user = User::find($delivery->user_id);
+            $delivery->user_name = $user->username;
+        }
+
+        return $deliveries;
+    }
+
     public function show(Delivery $delivery)
     {
         return new DeliveryResource($delivery);
