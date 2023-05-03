@@ -18,6 +18,7 @@ import Brands from "./components/Brands.vue";
 import Categories from "./components/Categories.vue";
 import Materials from "./components/Materials.vue";
 import AutomatedReordering from "./components/AutomatedReordering.vue";
+import RolePermissions from "./components/RolePermissions.vue";
 
 export default {
     mode: "history",
@@ -31,6 +32,7 @@ export default {
             path: "/stock",
             name: "Stock",
             component: Stock,
+            params: true,
         },
         {
             path: "/stock/add",
@@ -132,6 +134,11 @@ export default {
             path: "/automation",
             name: "AutomatedReordering",
             component: AutomatedReordering,
+        },
+        {
+            path: "/rolepermissions",
+            name: "RolePermissions",
+            component: RolePermissions,
         },
     ],
 };

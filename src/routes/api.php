@@ -12,6 +12,7 @@ use App\Http\Controllers\StockOrderController;
 use App\Http\Controllers\StockSaleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AutomationController;
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,7 @@ Route::apiResource('stockorders', StockOrderController::class);
 Route::apiResource('stocksales', StockSaleController::class);
 Route::apiResource('suppliers', SupplierController::class);
 Route::apiResource('automation', AutomationController::class);
+Route::apiResource('permissions', PermissionController::class);
 
 //custom API routes
 Route::get('dropdown_group/{dropdown_group}', [DropdownController::class, 'getDropdownByDropdownGroup']);
