@@ -14,15 +14,16 @@
             <div class="w-full">
                 <div class="flex min-h-full items-center justify-center px-4 pb-12 sm:px-6 lg:px-8">
                     <div class="w-full max-w-md space-y-8">
-                        <div>
-                            <svg aria-hidden="true" class="mx-auto h-20 w-auto text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" stroke="black" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <div class="flex items-center justify-center mb-5">
+                            <svg aria-hidden="true" class="h-20 w-auto text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" stroke="black" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
+                            <span class="pl-2 self-center text-6xl font-bold whitespace-nowrap dark:text-black">stocker</span>
                         </div>
                         <form class="mt-8 space-y-6" action="{{route('sign-in')}}" method="POST">
                             @csrf
-                            @if(Session::has('success'))
-                            <span class="flex items-center justify-center" style="color: red">{{Session::get('success')}}</span>
+                            @if(session()->has('success'))
+                            <span class="flex items-center justify-center" style="color: green">{{session()->get('success')}}</span>
                             @else
                             <span class="flex items-center justify-center" style="color: red">{{Session::get('fail')}}</span>
                             @endif

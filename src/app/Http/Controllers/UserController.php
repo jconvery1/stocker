@@ -38,7 +38,10 @@ class UserController extends Controller
         ]);
         $response = $user->save();
         if ($response) {
-            return back()->with('success', 'account successfully created!');
+            // return view('signIn');
+            // $request->session()->flash('success', 'account successfully created!');
+            // return back()->with('success', 'account successfully created!');
+            return redirect()->route('sign-in')->with('success', 'account successfully created!');
         } else {
             return back()->with('fail', 'something went wrong!');
         }

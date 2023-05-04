@@ -15,18 +15,18 @@
                 <div class="flex min-h-full items-center justify-center px-4 pb-12 sm:px-6 lg:px-8">
                     <div class="w-full max-w-md space-y-8">
                         <div>
-                            <div class="flex items-center justify-center">
-                                <svg aria-hidden="true" class="h-20 w-auto text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" stroke="black" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <div class="flex items-center justify-center mb-5">
+                                <svg aria-hidden="true" class="h-20 w-auto text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" stroke="black" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
+                                <span class="pl-2 self-center text-6xl font-bold whitespace-nowrap dark:text-black">stocker</span>
                             </div>
-                            <form class="mt-8 space-y-6" action="{{route('create-account')}}" method="POST">
+                            <form class="space-y-6" action="{{route('create-account')}}" method="POST">
                                 @csrf
                                 @if(Session::has('success'))
                                 <span class="flex items-center justify-center" style="color: green">{{Session::get('success')}}</span>
                                 @else
                                 <span class="flex items-center justify-center" style="color: red">@error('username') {{$message}} @enderror</span>
-                                <span class="flex items-center justify-center" style="color: red">@error('email') {{$message}} @enderror</span>
                                 @endif
                                 <input type="hidden" name="remember" value="true">
                                 <div class="-space-y-px rounded-md shadow-sm">
@@ -46,9 +46,9 @@
                                     <div>
                                         <label for="role" class="sr-only">Role</label>
                                         <select required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Role" name="role" id="role">
-                                            <option selected="selected" value="role" disabled>Select a role</option>
+                                            <option disabled>Select a role</option>
                                             <option value="manager">Manager</option>
-                                            <option value="floor staff">Floor Staff</option>
+                                            <option selected="selected" value="floor staff">Floor Staff</option>
                                         </select>
                                     </div>
                                 </div>
