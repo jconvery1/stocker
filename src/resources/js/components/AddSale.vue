@@ -238,7 +238,6 @@ export default {
         },
         async addSale() {
             const sale = {
-                customer_id: 1,
                 sale_price: this.totalPrice,
                 user_id: 1,
                 stock_sales: this.sale

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSaleRequest;
-use App\Http\Resources\SaleResource;
 use App\Models\Automation;
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Sale;
 use App\Models\StockItem;
-use App\Models\StockOrder;
 use App\Models\StockSale;
 
 class SaleController extends Controller
@@ -20,9 +17,7 @@ class SaleController extends Controller
         $sales = Sale::paginate(10);
 
         foreach ($sales as $sale) {
-            $customer = Customer::find($sale->customer_id);
             $user = User::find($sale->user_id);
-            $sale->customer_name = $customer->forename . ' ' . $customer->surname;
             $sale->user_name = $user->username;
         }
 
@@ -34,9 +29,7 @@ class SaleController extends Controller
         $sales = Sale::all();
 
         foreach ($sales as $sale) {
-            $customer = Customer::find($sale->customer_id);
             $user = User::find($sale->user_id);
-            $sale->customer_name = $customer->forename . ' ' . $customer->surname;
             $sale->user_name = $user->username;
         }
 

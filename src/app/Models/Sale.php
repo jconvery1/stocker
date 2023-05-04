@@ -16,7 +16,6 @@ class Sale extends Model
      */
     protected $fillable = [
         'id',
-        'customer_id',
         'sale_price',
         'user_id',
         'created_at',
@@ -29,14 +28,6 @@ class Sale extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    /**
-     * Get the customer that belongs to the sale.
-     */
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     /**

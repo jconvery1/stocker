@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\MailController;
@@ -27,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('users', UserController::class);
-Route::apiResource('customers', CustomerController::class);
 Route::apiResource('deliveries', DeliveryController::class);
 Route::apiResource('dropdowns', DropdownController::class);
 Route::apiResource('orders', OrderController::class);

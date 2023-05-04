@@ -32,9 +32,6 @@
                             Created By
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Customer
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             Created At
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -51,9 +48,6 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ sale.user_name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ sale.customer_name }}
                         </td>
                         <td class="px-6 py-4">
                             {{ sale.created_at.replace("T", " ").slice(0, -11) }}

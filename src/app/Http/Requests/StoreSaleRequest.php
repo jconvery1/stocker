@@ -24,7 +24,6 @@ class StoreSaleRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => ['required'],
             'sale_price' => ['required'],
             'user_id' => ['required']
         ];
