@@ -204,13 +204,9 @@
 
 <script>
 import axios from 'axios';
-import TailwindPagination from 'laravel-vue-pagination';
 
 export default {
     name: 'Stock',
-    components: {
-        'tailwind-pagination': TailwindPagination
-    },
     data() {
         return {
             stockItems: {},
