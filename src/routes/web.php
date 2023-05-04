@@ -22,6 +22,30 @@ Route::get('/sign-out', [UserController::class, 'signOut'])->name('sign-out');
 Route::get('/create-account', [CustomAuthController::class, 'create']);
 Route::post('/create-account', [UserController::class, 'store'])->name('create-account');
 
-Route::get('/{any?}', function () {
+// Route::get('/{any?}', function () {
+//     return view('app');
+// })->middleware('isAdmin');
+
+Route::get('/stock', function () {
     return view('app');
-})->middleware('auth');
+})->middleware('isAdmin');
+
+Route::get('/orders', function () {
+    return view('app');
+})->middleware('isAdmin');
+
+Route::get('/sales', function () {
+    return view('app');
+})->middleware('isAdmin');
+
+Route::get('/deliveries', function () {
+    return view('app');
+})->middleware('isAdmin');
+
+Route::get('/suppliers', function () {
+    return view('app');
+})->middleware('isAdmin');
+
+Route::get('/settings', function () {
+    return view('app');
+})->middleware('isAdmin');
