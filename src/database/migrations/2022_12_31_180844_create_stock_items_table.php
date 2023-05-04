@@ -19,7 +19,6 @@ class CreateStockItemsTable extends Migration
             $table->foreignId('supplier_id')
                 ->references('id')
                 ->on('suppliers');
-            $table->string('image')->nullable();
             $table->string('gender');
             $table->string('brand');
             $table->string('colour');
