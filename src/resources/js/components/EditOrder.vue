@@ -162,6 +162,7 @@ export default {
     },
     data() {
         return {
+            user: JSON.parse(this.$attrs.user),
             stockItems: null,
             order: [],
             stockOrder: null,
@@ -205,7 +206,7 @@ export default {
             const order = {
                 notes: this.notes,
                 supplier_id: this.order[0].supplier_id,
-                user_id: 1,
+                user_id: this.user.id,
                 order_datetime: now.slice(0, -5),
                 fulfilled: 0,
                 stock_orders: this.order

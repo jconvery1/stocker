@@ -181,6 +181,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            user: JSON.parse(this.$attrs.user),
             dropdown: false,
             stockItems: null,
             stockItem: {},
@@ -239,7 +240,7 @@ export default {
         async addSale() {
             const sale = {
                 sale_price: this.totalPrice,
-                user_id: 1,
+                user_id: this.user.id,
                 stock_sales: this.sale
             }
             try {

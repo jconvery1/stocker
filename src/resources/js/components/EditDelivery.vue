@@ -96,6 +96,7 @@ export default {
     },
     data() {
         return {
+            user: JSON.parse(this.$attrs.user),
             delivery: null,
             orderId: null,
             order: [],
@@ -146,7 +147,7 @@ export default {
             const today = new Date(timeElapsed).toISOString();
             const now = today.replace("T", " ");
             const delivery = {
-                user_id: 1,
+                user_id: this.user.id,
                 delivery_datetime: now.slice(0, -5),
                 order_id: this.orderId
             }
