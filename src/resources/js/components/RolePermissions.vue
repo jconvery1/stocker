@@ -275,6 +275,7 @@ export default {
                 const permissions = this.managerPermissions.concat(this.floorStaffPermissions);
                 await axios.post("http://127.0.0.1:8080/api/permissions", permissions)
                 await this.$router.push({path: '/settings'})
+                window.location.reload();
             } catch (error) {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;

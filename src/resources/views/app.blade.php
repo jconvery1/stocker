@@ -4,6 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @php
+    $permissions = \App\Models\Permission::where([['role', Auth::user()->role],['access', 1]])->get();
+    @endphp
+    <meta name="user-id" content="{{ json_encode($permissions,TRUE) }}">
+    <meta name="user-id" content="{{ array_search('orders', array_column(json_decode($permissions,TRUE), 'module')) }}">
     <link rel="stylesheet" href="/css/app.css">
     <title>Laravel</title>
 </head>
@@ -20,6 +25,7 @@
                             </svg>
                             <span class="pl-1 self-center text-xl font-semibold whitespace-nowrap dark:text-white">stocker</span>
                         </a>
+                        @if (false !== (array_search('stock', array_column(json_decode($permissions,TRUE), 'module'))))
                         <li>
                             <router-link to="/stock" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -28,6 +34,8 @@
                                 <span class="flex-1 ml-3 whitespace-nowrap">Stock</span>
                             </router-link>
                         </li>
+                        @endif
+                        @if (false !== (array_search('orders', array_column(json_decode($permissions,TRUE), 'module'))))
                         <li>
                             <router-link to="/orders" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -37,6 +45,8 @@
                                 <span class="flex-1 ml-3 whitespace-nowrap">Orders</span>
                             </router-link>
                         </li>
+                        @endif
+                        @if (false !== (array_search('sales', array_column(json_decode($permissions,TRUE), 'module'))))
                         <li>
                             <router-link to="/sales" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +57,8 @@
                                 <span class="flex-1 ml-3 whitespace-nowrap">Sales</span>
                             </router-link>
                         </li>
+                        @endif
+                        @if (false !== (array_search('deliveries', array_column(json_decode($permissions,TRUE), 'module'))))
                         <li>
                             <router-link to="/deliveries" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -58,6 +70,8 @@
                                 <span class="flex-1 ml-3 whitespace-nowrap">Deliveries</span>
                             </router-link>
                         </li>
+                        @endif
+                        @if (false !== (array_search('suppliers', array_column(json_decode($permissions,TRUE), 'module'))))
                         <li>
                             <router-link to="/suppliers" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -66,6 +80,8 @@
                                 <span class="flex-1 ml-3 whitespace-nowrap">Suppliers</span>
                             </router-link>
                         </li>
+                        @endif
+                        @if (false !== (array_search('settings', array_column(json_decode($permissions,TRUE), 'module'))))
                         <li>
                             <router-link to="/settings" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -75,6 +91,7 @@
                                 <span class="flex-1 ml-3 whitespace-nowrap">Settings</span>
                             </router-link>
                         </li>
+                        @endif
                         <li>
                             <a href="/profile" class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +117,27 @@
         </main>
         <hr>
     </div>
-    <script src="/js/app.js"></script>
+    <script src="/js/app.js">
+        // import axios from 'axios';
+        // export default {
+        //     data() {
+        //         return {
+        //             user: null
+        //         }
+        //     },
+        //     mounted() {
+        //         this.getPermissions();
+        //     },
+        //     methods: {
+        //         getPermissions() {
+        //             axios.get("http://127.0.0.1:8080/api/users/")
+        //                 .then((response) => {
+        //                     this.user = response.data;
+        //                 });
+        //         }
+        //     }
+        // }
+    </script>
 </body>
 
 </html>
