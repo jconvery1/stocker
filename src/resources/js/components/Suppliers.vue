@@ -104,8 +104,11 @@
             </table>
             <div class="flex flex-col items-center mt-2">
                 <!-- Help text -->
-                <span class="text-sm text-gray-700 dark:text-gray-400">
+                <span v-if="suppliers.from" class="text-sm text-gray-700 dark:text-gray-400">
                     Showing {{ suppliers.from }} to {{ suppliers.to }} of {{ suppliers.total }} Entries
+                </span>
+                <span v-else class="text-sm text-gray-700 dark:text-gray-400">
+                    No entries found
                 </span>
                 <!-- Buttons -->
                 <div class="inline-flex mt-2 xs:mt-0">
