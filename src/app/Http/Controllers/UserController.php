@@ -25,11 +25,13 @@ class UserController extends Controller
         $request->validate([
             'username' => ['required', 'unique:users'],
             'password' => ['required'],
-            'email' => ['required', 'unique:users', 'email']
+            'email' => ['required', 'unique:users', 'email'],
+            'role' => ['required']
         ]);
         $user = new User();
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->fill([
             'password' => Hash::make($user->password)
         ]);

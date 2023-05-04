@@ -42,7 +42,7 @@
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Configure the settings for automated reordering</p>
             </div>
         </div>
-        <div class="flex justify-items-start">
+        <div v-if="this.user.role == 'admin'" class="flex justify-items-start">
             <div class="max-w-sm p-5 mx-10 my-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <router-link :to="{path: '/rolepermissions'}" class="flex">
                     <svg aria-hidden="true" class="flex-shrink-0 mr-2 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -59,10 +59,24 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            user: JSON.parse(this.$attrs.user)
+        }
+    },
+    methods:{
+        getUser() {
+            axios.get("http://127.0.0.1:8080/api/user/1")
+                .then((response) => {
+                    this.settings = response.data.data;
+            });
+        },
+    }
 }
 </script>
-
+Vue.prototype.$userId = document
+    .querySelector("meta[name='user-id']")
+    .getAttribute("content");
 <style>
 
 </style>

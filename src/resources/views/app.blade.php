@@ -9,6 +9,7 @@
     @endphp
     <meta name="user-id" content="{{ json_encode($permissions,TRUE) }}">
     <meta name="user-id" content="{{ array_search('orders', array_column(json_decode($permissions,TRUE), 'module')) }}">
+    <meta name="user-id" content="{{ Auth::user()->id }}">
     <link rel="stylesheet" href="/css/app.css">
     <title>Laravel</title>
 </head>
@@ -112,7 +113,7 @@
                 </div>
             </aside>
             <div class="w-full">
-                <router-view></router-view>
+                <router-view user={{ Auth::user() }}></router-view>
             </div>
         </main>
         <hr>
