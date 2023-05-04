@@ -250,19 +250,15 @@ export default {
             genders: [
                 {
                     id: 1,
-                    name: 'men'
+                    name: 'Men'
                 },
                 {
                     id: 2,
-                    name: 'women'
+                    name: 'Women'
                 },
                 {
                     id: 3,
-                    name: 'unisex'
-                },
-                {
-                    id: 4,
-                    name: 'kids'
+                    name: 'Unisex'
                 }
             ],
             colours: [

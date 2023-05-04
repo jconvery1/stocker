@@ -16,7 +16,7 @@ class CreateDropdownsTable extends Migration
         Schema::create('dropdowns', function (Blueprint $table) {
             $table->id('id');
             $table->string('dropdown_group');
-            $table->string('value')->unique();
+            $table->string('value');
             $table->timestamps();
         });
     }
