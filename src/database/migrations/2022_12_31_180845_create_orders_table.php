@@ -19,10 +19,12 @@ class CreateOrdersTable extends Migration
             $table->string('notes')->nullable();
             $table->foreignId('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->foreignId('supplier_id')
                 ->references('id')
-                ->on('suppliers');
+                ->on('suppliers')
+                ->onDelete('cascade');
             $table->boolean('fulfilled')->default(0);
             $table->timestamps();
         });

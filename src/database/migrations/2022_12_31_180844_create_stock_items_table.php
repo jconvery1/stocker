@@ -18,7 +18,8 @@ class CreateStockItemsTable extends Migration
             $table->string('name')->unique();
             $table->foreignId('supplier_id')
                 ->references('id')
-                ->on('suppliers');
+                ->on('suppliers')
+                ->onDelete('cascade');
             $table->string('gender');
             $table->string('brand');
             $table->string('colour');

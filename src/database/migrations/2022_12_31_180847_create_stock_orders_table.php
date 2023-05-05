@@ -18,10 +18,11 @@ class CreateStockOrdersTable extends Migration
             $table->foreignId('order_id')
                 ->references('id')
                 ->on('orders')
-                ->onDelete('cascade');;
+                ->onDelete('cascade');
             $table->foreignId('stock_item_id')
                 ->references('id')
-                ->on('stock_items');
+                ->on('stock_items')
+                ->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });

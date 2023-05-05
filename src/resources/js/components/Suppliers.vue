@@ -176,8 +176,7 @@ export default {
                 return;
             }
             await axios.delete("http://127.0.0.1:8080/api/suppliers/" + supplier.id);
-            this.suppliers = null;
-            this.getSuppliers();
+            window.location.reload();
         },
         editSupplier(supplier) {
             this.$router.push({name: 'EditSupplier', params: { id: supplier.id } })

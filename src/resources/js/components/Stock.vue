@@ -114,7 +114,7 @@
                                         <span class="tooltiptext">Item has been reordered</span>
                                     </div>
                                 </div>
-                                <div v-else-if="stockItem.stock_level <= settings.reorder_level">
+                                <div v-else-if="settings.enabled && stockItem.stock_level <= settings.reorder_level">
                                     <div class="tooltip">
                                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ml-1" fill="red" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path clip-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" fill-rule="evenodd"></path>
@@ -235,7 +235,8 @@ export default {
     },
     methods: {
         itemHasUnfulfilledOrder(item) {
-            return this.orders.data.filter((order) => order.notes == "Automated Reorder: " + item.name).length > 0;
+            return this.orders.data.filter((order) => 
+                order.notes == "Automated Reorder: " + item.name).length > 0 && item.stock_level <= this.settings.reorder_level;
         },
         getSettings() {
             axios.get("http://127.0.0.1:8080/api/automation/1")
@@ -265,7 +266,7 @@ export default {
                 .then((response) => {
                     this.orders = Object.assign({}, response.data);
                     this.orders.data = this.orders.data.filter((order) =>
-                        order.fulfilled == 0 && order.notes.includes('Automated Reorder')
+                        order.fulfilled == 0 && order.notes && order.notes.includes('Automated Reorder')
                     )
                 });
         },
@@ -274,8 +275,7 @@ export default {
                 return;
             }
             await axios.delete("http://127.0.0.1:8080/api/stockitems/" + stockItem.id);
-            this.stockItems = null;
-            this.getStockItems();
+            window.location.reload();
         },
         editStockItem(stockItem) {
             this.$router.push({name: 'EditStockItem', params: { id: stockItem.id } })

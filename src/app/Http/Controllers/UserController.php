@@ -63,7 +63,7 @@ class UserController extends Controller
                 return redirect('/stock');
             }
         }
-        return back()->with('fail', 'No account found for these credentials!');
+        return redirect()->route('sign-in')->with('fail', 'Username not found!');
     }
 
     /**

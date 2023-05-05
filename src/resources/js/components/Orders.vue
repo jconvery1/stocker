@@ -195,8 +195,7 @@ export default {
                 return;
             }
             await axios.delete("http://127.0.0.1:8080/api/orders/" + order.id);
-            this.orders = null;
-            this.getOrders();
+            window.location.reload();
         },
         async fulfillOrder(order) {
             if (!window.confirm("Are You Sure?")) {

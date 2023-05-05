@@ -24,7 +24,8 @@
                             @csrf
                             @if(session()->has('success'))
                             <span class="flex items-center justify-center" style="color: green">{{session()->get('success')}}</span>
-                            @else
+                            @endif
+                            @if(session()->has('fail'))
                             <span class="flex items-center justify-center" style="color: red">{{Session::get('fail')}}</span>
                             @endif
                             <input type="hidden" name="remember" value="true">

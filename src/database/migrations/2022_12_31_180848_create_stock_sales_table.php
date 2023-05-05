@@ -21,7 +21,8 @@ class CreateStockSalesTable extends Migration
                 ->onDelete('cascade');
             $table->foreignId('stock_item_id')
                 ->references('id')
-                ->on('stock_items');
+                ->on('stock_items')
+                ->onDelete('cascade');
             $table->integer('quantity');
             $table->integer('price');
             $table->timestamps();

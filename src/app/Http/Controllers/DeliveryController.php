@@ -55,7 +55,7 @@ class DeliveryController extends Controller
     public function update(StoreDeliveryRequest $request, Delivery $delivery)
     {
         if ($delivery->order_id != $request->order_id) {
-            $previousOrder = Order::find('id', $delivery->order_id);
+            $previousOrder = Order::find($delivery->order_id);
             $previousOrder->fulfilled = 0;
             $previousOrder->save();
             $stockOrders = StockOrder::where('order_id', $previousOrder->id)->get();

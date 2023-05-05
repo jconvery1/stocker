@@ -18,7 +18,8 @@ class CreateSalesTable extends Migration
             $table->integer('sale_price');
             $table->foreignId('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

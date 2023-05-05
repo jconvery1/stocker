@@ -160,8 +160,7 @@ export default {
                 return;
             }
             await axios.delete("http://127.0.0.1:8080/api/sales/" + sale.id);
-            this.sales = null;
-            this.getSales();
+            window.location.reload();
         },
         editSale(sale) {
             this.$router.push({name: 'EditSale', params: { id: sale.id } })
