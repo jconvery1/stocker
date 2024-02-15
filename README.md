@@ -1,4 +1,4 @@
-# Stocker - A stock management application built using Vue.js and Laravel
+# Stocker
 
 This web application was developed as the final year project for my computer science degree, it was the first large coding project I completed independently and although it's far from perfect it was good enough to land me a first.
 
