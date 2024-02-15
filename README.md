@@ -26,3 +26,5 @@ To get started with the application, follow these steps:
 2. Ensure you have Docker installed and running.
 3. Navigate to the project directory and run `docker-compose up` to start the containers.
 4. Access the application through your web browser at the specified URL.
+
+Note: 'composer install' may need ran in the project directory, this will import the packages and create the vendor folder.
