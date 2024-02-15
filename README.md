@@ -1,6 +1,6 @@
 # Stocker
 
-This web application was developed as the final year project for my computer science degree, it was the first large coding project I completed independently and although it's far from perfect it was good enough to land me a first.
+This web application was developed as the final year project for my computer science degree, it was the first large coding project I completed independently and although it's far from perfect it was good enough to land me a first-class honours.
 
 It is a comprehensive stock management system designed to streamline inventory control and order processing for a small shoe retailer.
 
@@ -15,7 +15,7 @@ It is a comprehensive stock management system designed to streamline inventory c
 - **Stock Management**: Users can efficiently manage stock items, including tracking quantities, prices, suppliers, as well as facilitating order processing, sales tracking, and delivery management to streamline business operations. Suppliers can be managed within the system, allowing for easy communication and order placement.
 - **System Settings**: Users can configure various system settings to customize the application according to their business requirements.
 - **User Authentication and Authorization**: The application includes secure sign-in and user creation screens. It supports two different authorization levels: managers and floor staff, allowing for granular access control.
-- **Automated Reordering**: When a stock item reaches a certain level, the system automatically triggers reordering. Additionally, when a stock item needs to be reordered, an email notification is sent to the associated supplier.
+- **Automated Reordering**: When a stock item reaches a certain level, the system automatically reorders this item based on an amount configured by the user.
 - **Email Functionality**: An email is sent to the associated supplier when a stock item is reordered.
 
 ## Getting Started
