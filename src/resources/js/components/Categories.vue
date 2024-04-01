@@ -122,6 +122,8 @@ export default {
                 .then((response) => {
                     this.categories = response.data;
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteCategory(category) {
