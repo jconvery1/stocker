@@ -211,7 +211,7 @@ export default {
         },
         price() {
             if (this.stockItemId) {
-                const stockitem = this.stockItems.find(item => item.id == this.stockItemId);
+                const stockitem = this.stockItems?.find(item => item.id == this.stockItemId);
                 return stockitem.price * this.stockQuantity;
             } else {
                 return 0;
@@ -220,10 +220,10 @@ export default {
     },
     methods: {
         removeItemFromDropdown(item) {
-            const index = this.stockItems.findIndex((stockItem) => {
+            const index = this.stockItems?.findIndex((stockItem) => {
                 return stockItem.id === item.id;
             })
-            this.stockItems.splice(index, 1);
+            this.stockItems?.splice(index, 1);
         },
         getStockItems() {
             axios.get("http://localhost:8888/api/stock_dropdown")
@@ -234,6 +234,8 @@ export default {
                         return this.sale.every(sale => sale.stock_item_id != item.id);
                     });
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async getSale(id) {
@@ -246,6 +248,8 @@ export default {
                         sale.itemPrice = sale.price;
                     }
                     this.getStockItems();
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async addSale() {
