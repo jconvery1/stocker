@@ -7,7 +7,7 @@
     @php
     $permissions = \App\Models\Permission::where([['role', Auth::user()->role],['access', 1]])->get();
     @endphp
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="public/css/app.css">
     <title>Laravel</title>
 </head>
 
@@ -107,8 +107,7 @@
         </main>
         <hr>
     </div>
-    <script src="/js/app.js">
-    </script>
+    <script src="public/js/app.js"></script>
 </body>
 
 </html>
