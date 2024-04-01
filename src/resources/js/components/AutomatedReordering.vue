@@ -115,7 +115,9 @@ export default {
                 .then((response) => {
                     this.settings = response.data.data;
                     this.dataFetched = true;
-            });
+                }).catch((error) => {
+                    console.log(error);
+                });
         },
         async saveSettings() {
             try {
