@@ -192,12 +192,16 @@ export default {
                 .then((response) => {
                     this.stockItems = response.data;
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async getStockItem(id) {
             axios.get("http://localhost:8888/api/stockitems/" + id)
                 .then((response) => {
                     this.stockItem = response.data.data;
+                }).catch((error) => {
+                    console.log(error)
                 });
         },
         async addOrder() {
