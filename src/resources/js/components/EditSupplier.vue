@@ -133,6 +133,8 @@ export default {
             axios.get("http://localhost:8888/api/suppliers/" + id)
                 .then((response) => {
                     this.supplier = response.data.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async editSupplier() {
