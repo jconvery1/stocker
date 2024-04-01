@@ -111,12 +111,16 @@ export default {
                     this.orders = this.orders.filter((order) => order.fulfilled == 0);
                     
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getOrder(id) {
             axios.get("http://localhost:8888/api/orders/" + id)
                 .then((response) => {
                     this.order = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async addDelivery() {
