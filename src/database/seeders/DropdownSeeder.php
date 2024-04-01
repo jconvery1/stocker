@@ -13,28 +13,19 @@ class DropdownSeeder extends Seeder
         $categories = ['Running', 'Walking', 'Hiking', 'Training', 'Basketball', 'Football', 'Sneakers', 'Casual'];
         $brands = ['Nike', 'Adidas', 'Puma', 'New Balance', 'Reebok', 'Under Armour', 'Asics', 'Saucony'];
 
-        $dropdowns = [];
-
-        // Generate 10 entries for each group
-        for ($i = 0; $i < 10; $i++) {
-            $dropdowns[] = [
-                'dropdown_group' => 'material',
-                'value' => $materials[array_rand($materials)]
-            ];
-
-            $dropdowns[] = [
-                'dropdown_group' => 'category',
-                'value' => $categories[array_rand($categories)]
-            ];
-
-            $dropdowns[] = [
-                'dropdown_group' => 'brand',
-                'value' => $brands[array_rand($brands)]
-            ];
+        // Create materials
+        foreach ($materials as $material) {
+            Dropdown::factory()->create(['dropdown_group' => 'material', 'value' => $material]);
         }
 
-        // Insert data into the database
-        Dropdown::insert($dropdowns);
+        // Create categories
+        foreach ($categories as $category) {
+            Dropdown::factory()->create(['dropdown_group' => 'category', 'value' => $category]);
+        }
+
+        // Create brands
+        foreach ($brands as $brand) {
+            Dropdown::factory()->create(['dropdown_group' => 'brand', 'value' => $brand]);
+        }
     }
 }
-
