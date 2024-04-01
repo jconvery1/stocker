@@ -3,10 +3,10 @@ version: '3.8'
 services:
 
   nginx:
-    container_name: nginx
+    container_name: nginx-stocker
     image: nginx:alpine
     ports:
-      - "8080:80"
+      - "8888:80"
     depends_on:
       - app
       - db
