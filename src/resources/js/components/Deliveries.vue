@@ -143,9 +143,9 @@ export default {
     computed: {
         filteredResults() {
             if (!this.search) {
-                return this.deliveries.data;
+                return this.deliveries?.data || [];
             }
-            return this.allDeliveries.filter((delivery) => delivery.id.toString().includes(this.search));
+            return (this.allDeliveries || []).filter((delivery) => delivery.id.toString().includes(this.search));
         }
     },
     methods: {
@@ -153,12 +153,16 @@ export default {
             axios.get(`http://localhost:8888/api/deliveries?page=${page}`)
                 .then((response) => {
                     this.deliveries = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getAllDeliveries() {
             axios.get(`http://localhost:8888/api/all_deliveries`)
                 .then((response) => {
                     this.allDeliveries = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteDelivery(delivery) {
