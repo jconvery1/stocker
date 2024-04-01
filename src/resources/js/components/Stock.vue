@@ -230,19 +230,24 @@ export default {
             if (!this.search) {
                 return this.stockItems.data;
             }
-            return this.allStockItems.filter((item) => item.name.includes(this.search));
+            return this.allStockItems?.filter((item) => item.name.includes(this.search));
         }
     },
     methods: {
         itemHasUnfulfilledOrder(item) {
-            return this.orders.data.filter((order) => 
-                order.notes == "Automated Reorder: " + item.name).length > 0 && item.stock_level <= this.settings.reorder_level;
+            const ordersData = this.orders?.data || [];
+            const settingsReorderLevel = this.settings?.reorder_level;
+
+            return ordersData.filter(order => order.notes === "Automated Reorder: " + item.name).length > 0 &&
+                item.stock_level <= settingsReorderLevel;
         },
         getSettings() {
             axios.get("http://localhost:8888/api/automation/1")
                 .then((response) => {
                     this.settings = response.data.data;
-            });
+                }).catch((error) => {
+                    console.log(error);
+                });
         },
         getStockItems(page = 1) {
             this.stockItems = null;
@@ -251,6 +256,8 @@ export default {
                     this.stockItems = Object.assign({}, response.data);
                     this.stockItemsObject = Object.assign({}, this.stockItems);
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getAllStockItems() {
@@ -259,6 +266,8 @@ export default {
                 .then((response) => {
                     this.allStockItems = response.data;
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getOrders() {
@@ -268,6 +277,8 @@ export default {
                     this.orders.data = this.orders.data.filter((order) =>
                         order.fulfilled == 0 && order.notes && order.notes.includes('Automated Reorder')
                     )
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteStockItem(stockItem) {
