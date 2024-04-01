@@ -333,20 +333,28 @@ export default {
             axios.get("http://localhost:8888/api/supplier_dropdown")
                 .then((response) => {
                     this.suppliers = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getDropdowns() {
             axios.get("http://localhost:8888/api/dropdown_group/" + 'brand')
                 .then((response) => {
                     this.brands = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
             axios.get("http://localhost:8888/api/dropdown_group/" + 'category')
                 .then((response) => {
                     this.categories = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
             axios.get("http://localhost:8888/api/dropdown_group/" + 'material')
                 .then((response) => {
                     this.materials = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         }
     }
