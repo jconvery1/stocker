@@ -63,14 +63,6 @@ export default {
         return {
             user: JSON.parse(this.$attrs.user)
         }
-    },
-    methods:{
-        getUser() {
-            axios.get("http://localhost:8888/api/user/1")
-                .then((response) => {
-                    this.settings = response.data.data;
-            });
-        },
     }
 }
 </script>
