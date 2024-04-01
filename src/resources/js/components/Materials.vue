@@ -122,6 +122,8 @@ export default {
                 .then((response) => {
                     this.materials = response.data;
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteMaterial(material) {
