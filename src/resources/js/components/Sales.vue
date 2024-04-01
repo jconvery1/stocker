@@ -137,9 +137,9 @@ export default {
     computed: {
         filteredResults() {
             if (!this.search) {
-                return this.sales.data;
+                return this.sales?.data || [];
             }
-            return this.allSales.filter((sale) => sale.id.toString().includes(this.search));
+            return (this.allSales || []).filter(sale => sale.id.toString().includes(this.search));
         }
     },
     methods: {
@@ -147,12 +147,16 @@ export default {
             axios.get(`http://localhost:8888/api/sales?page=${page}`)
                 .then((response) => {
                     this.sales = Object.assign({}, response.data);
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getAllSales() {
             axios.get(`http://localhost:8888/api/all_sales`)
                 .then((response) => {
                     this.allSales = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteSale(sale) {
