@@ -172,9 +172,9 @@ export default {
     computed: {
         filteredResults() {
             if (!this.search) {
-                return this.orders.data;
+                return this.orders?.data || [];
             }
-            return this.allOrders.filter((order) => order.id.toString().includes(this.search));
+            return (this.allOrders || []).filter((order) => order.id.toString().includes(this.search));
         }
     },
     methods: {
@@ -182,12 +182,16 @@ export default {
             axios.get(`http://localhost:8888/api/orders?page=${page}`)
                 .then((response) => {
                     this.orders = Object.assign({}, response.data);
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getAllOrders() {
             axios.get(`http://localhost:8888/api/order_dropdown`)
                 .then((response) => {
                     this.allOrders = response.data;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteOrder(order) {
