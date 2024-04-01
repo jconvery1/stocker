@@ -189,6 +189,8 @@ export default {
                         this.filterStockItems();
                     }
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getOrder(id) {
@@ -197,6 +199,8 @@ export default {
                     this.order = response.data;
                     this.notes = this.order[0].notes;
                     this.getStockItems();
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async editOrder() {
