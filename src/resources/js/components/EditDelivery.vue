@@ -124,6 +124,8 @@ export default {
                     this.orders = response.data;
                     this.orders = this.orders.filter((order) => order.fulfilled == 0);
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getOrder(id) {
@@ -131,6 +133,8 @@ export default {
                 .then((response) => {
                     this.order = response.data;
                     this.gettingDelivery = false;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getDelivery(id) {
@@ -140,6 +144,8 @@ export default {
                     this.gettingDelivery = true;
                     this.orderId = this.delivery.order_id;
                     this.getOrder(this.delivery.order_id);
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async editDelivery() {
