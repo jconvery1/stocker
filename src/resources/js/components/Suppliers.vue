@@ -151,9 +151,9 @@ export default {
     computed: {
         filteredResults() {
             if (!this.search) {
-                return this.suppliers.data;
+                return this.suppliers?.data || [];
             }
-            return this.allSuppliers.filter((supplier) => supplier.name.includes(this.search));
+            return (this.allSuppliers || []).filter(supplier => supplier.name.includes(this.search));
         }
     },
     methods: {
@@ -162,6 +162,8 @@ export default {
                 .then((response) => {
                     this.suppliers = response.data;
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         getAllSuppliers() {
@@ -169,6 +171,8 @@ export default {
                 .then((response) => {
                     this.allSuppliers = response.data;
                     this.tableId++;
+                }).catch((error) => {
+                    console.log(error);
                 });
         },
         async deleteSupplier(supplier) {
