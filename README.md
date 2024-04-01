@@ -27,7 +27,7 @@ To get started with the application, follow these steps:
 3. Navigate to the project directory.
 4. Run `docker-compose up` to start the containers.
 5. Ensure `DB_HOST` in your .env file is set to `127.0.0.1`.
-6. Run `php artisan migrate:fresh` to migrate and seed the database.
+6. Run `php artisan migrate:fresh --seed` to migrate and seed the database.
 7. Change `DB_HOST` in your .env file to `mysql`.
 8. Access the application through your web browser (http://localhost:8888/sign-in).
 
