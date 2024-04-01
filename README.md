@@ -24,7 +24,11 @@ To get started with the application, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Ensure you have Docker installed and running.
-3. Navigate to the project directory and run `docker-compose up` to start the containers.
-4. Access the application through your web browser (http://localhost:8888/sign-in).
+3. Navigate to the project directory.
+4. Run `docker-compose up` to start the containers.
+5. Change `DB_HOST` in your .env file to `127.0.0.1`.
+6. Run `php artisan migrate:fresh` to migrate and seed the database.
+7. Change `DB_HOST` in your .env file to `mysql`.
+8. Access the application through your web browser (http://localhost:8888/sign-in).
 
 Note: 'composer install' may need ran in the project directory, this will import the packages and create the vendor folder.
