@@ -27,12 +27,6 @@ class CreateStockSalesTable extends Migration
             $table->integer('price');
             $table->timestamps();
         });
-
-        Schema::table('deliveries', function (Blueprint $table) {
-            $table->foreignId('order_id')
-                ->references('id')
-                ->on('orders');
-        });
     }
 
     /**

@@ -19,6 +19,10 @@ class CreateDeliveriesTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->foreignId('order_id')
+                ->references('id')
+                ->on('orders')
+                ->onDelete('cascade');
             $table->dateTime('delivery_datetime');
             $table->timestamps();
         });
