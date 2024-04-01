@@ -118,7 +118,7 @@ export default {
     },
     methods: {
         getMaterials() {
-            axios.get("http://127.0.0.1:8080/api/dropdown_group/material")
+            axios.get("http://localhost:8888/api/dropdown_group/material")
                 .then((response) => {
                     this.materials = response.data;
                     this.tableId++;
@@ -128,13 +128,13 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/dropdowns/" + material.id);
+            await axios.delete("http://localhost:8888/api/dropdowns/" + material.id);
             this.materials = null;
             this.getMaterials();
         },
         async addMaterial(material) {
             try {
-                await axios.post("http://127.0.0.1:8080/api/dropdowns", this.newMaterial)
+                await axios.post("http://localhost:8888/api/dropdowns", this.newMaterial)
                 this.newMaterial = {
                     dropdown_group: 'material',
                     value: null

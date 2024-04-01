@@ -325,14 +325,14 @@ export default {
     },
     methods: {
         getStockItem(id) {
-            axios.get("http://127.0.0.1:8080/api/stockitems/" + id)
+            axios.get("http://localhost:8888/api/stockitems/" + id)
                 .then((response) => {
                     this.stockItem = response.data.data;
                 });
         },
         async editStockItem() {
             try {
-                await axios.put("http://127.0.0.1:8080/api/stockitems/" + this.id, this.stockItem);
+                await axios.put("http://localhost:8888/api/stockitems/" + this.id, this.stockItem);
                 await this.$router.push({path: '/stock'})
             } catch (error) {
                 if (error.response.status === 422) {
@@ -341,21 +341,21 @@ export default {
             }
         },
         getSuppliers() {
-            axios.get("http://127.0.0.1:8080/api/suppliers")
+            axios.get("http://localhost:8888/api/suppliers")
                 .then((response) => {
                     this.suppliers = response.data.data;
                 });
         },
         getDropdowns() {
-            axios.get("http://127.0.0.1:8080/api/dropdown_group/" + 'brand')
+            axios.get("http://localhost:8888/api/dropdown_group/" + 'brand')
                 .then((response) => {
                     this.brands = response.data;
                 });
-            axios.get("http://127.0.0.1:8080/api/dropdown_group/" + 'category')
+            axios.get("http://localhost:8888/api/dropdown_group/" + 'category')
                 .then((response) => {
                     this.categories = response.data;
                 });
-            axios.get("http://127.0.0.1:8080/api/dropdown_group/" + 'material')
+            axios.get("http://localhost:8888/api/dropdown_group/" + 'material')
                 .then((response) => {
                     this.materials = response.data;
                 });

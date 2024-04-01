@@ -118,7 +118,7 @@ export default {
     },
     methods: {
         getCategories() {
-            axios.get("http://127.0.0.1:8080/api/dropdown_group/category")
+            axios.get("http://localhost:8888/api/dropdown_group/category")
                 .then((response) => {
                     this.categories = response.data;
                     this.tableId++;
@@ -128,13 +128,13 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/dropdowns/" + category.id);
+            await axios.delete("http://localhost:8888/api/dropdowns/" + category.id);
             this.categories = null;
             this.getCategories();
         },
         async addCategory(category) {
             try {
-                await axios.post("http://127.0.0.1:8080/api/dropdowns", this.newCategory)
+                await axios.post("http://localhost:8888/api/dropdowns", this.newCategory)
                 this.newCategory = {
                     dropdown_group: 'category',
                     value: null

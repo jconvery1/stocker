@@ -119,7 +119,7 @@ export default {
     },
     methods: {
         getOrders() {
-            axios.get("http://127.0.0.1:8080/api/order_dropdown")
+            axios.get("http://localhost:8888/api/order_dropdown")
                 .then((response) => {
                     this.orders = response.data;
                     this.orders = this.orders.filter((order) => order.fulfilled == 0);
@@ -127,14 +127,14 @@ export default {
                 });
         },
         getOrder(id) {
-            axios.get("http://127.0.0.1:8080/api/orders/" + id)
+            axios.get("http://localhost:8888/api/orders/" + id)
                 .then((response) => {
                     this.order = response.data;
                     this.gettingDelivery = false;
                 });
         },
         getDelivery(id) {
-            axios.get("http://127.0.0.1:8080/api/deliveries/" + id)
+            axios.get("http://localhost:8888/api/deliveries/" + id)
                 .then((response) => {
                     this.delivery = response.data.data;
                     this.gettingDelivery = true;
@@ -152,7 +152,7 @@ export default {
                 order_id: this.orderId
             }
             try {
-                await axios.put("http://127.0.0.1:8080/api/deliveries/" + this.id, delivery)
+                await axios.put("http://localhost:8888/api/deliveries/" + this.id, delivery)
                 await this.$router.push({path: '/deliveries'})
             } catch (error) {
                 if (error.response.status === 422) {

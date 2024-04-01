@@ -144,13 +144,13 @@ export default {
     },
     methods: {
         getSales(page = 1) {
-            axios.get(`http://127.0.0.1:8080/api/sales?page=${page}`)
+            axios.get(`http://localhost:8888/api/sales?page=${page}`)
                 .then((response) => {
                     this.sales = Object.assign({}, response.data);
                 });
         },
         getAllSales() {
-            axios.get(`http://127.0.0.1:8080/api/all_sales`)
+            axios.get(`http://localhost:8888/api/all_sales`)
                 .then((response) => {
                     this.allSales = response.data;
                 });
@@ -159,7 +159,7 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/sales/" + sale.id);
+            await axios.delete("http://localhost:8888/api/sales/" + sale.id);
             window.location.reload();
         },
         editSale(sale) {

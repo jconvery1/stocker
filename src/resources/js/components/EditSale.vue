@@ -226,7 +226,7 @@ export default {
             this.stockItems.splice(index, 1);
         },
         getStockItems() {
-            axios.get("http://127.0.0.1:8080/api/stock_dropdown")
+            axios.get("http://localhost:8888/api/stock_dropdown")
                 .then((response) => {
                     this.stockItems = response.data;
                     //remove item if it is in the summary
@@ -237,7 +237,7 @@ export default {
                 });
         },
         async getSale(id) {
-            axios.get("http://127.0.0.1:8080/api/sales/" + id)
+            axios.get("http://localhost:8888/api/sales/" + id)
                 .then((response) => {
                     this.sale = response.data;
                     for (const sale of this.sale) {
@@ -255,7 +255,7 @@ export default {
                 stock_sales: this.sale
             }
             try {
-                await axios.post("http://127.0.0.1:8080/api/sales", sale)
+                await axios.post("http://localhost:8888/api/sales", sale)
                 await this.$router.push({path: '/sales'})
             } catch (error) {
                 if (error.response.status === 422) {
@@ -270,7 +270,7 @@ export default {
                 stock_sales: this.sale
             }
             try {
-                await axios.put("http://127.0.0.1:8080/api/sales/" + this.id, sale)
+                await axios.put("http://localhost:8888/api/sales/" + this.id, sale)
                 await this.$router.push({path: '/sales'})
             } catch (error) {
                 if (error.response.status === 422) {

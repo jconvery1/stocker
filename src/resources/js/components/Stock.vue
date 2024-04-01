@@ -239,14 +239,14 @@ export default {
                 order.notes == "Automated Reorder: " + item.name).length > 0 && item.stock_level <= this.settings.reorder_level;
         },
         getSettings() {
-            axios.get("http://127.0.0.1:8080/api/automation/1")
+            axios.get("http://localhost:8888/api/automation/1")
                 .then((response) => {
                     this.settings = response.data.data;
             });
         },
         getStockItems(page = 1) {
             this.stockItems = null;
-            axios.get(`http://127.0.0.1:8080/api/stockitems?page=${page}`)
+            axios.get(`http://localhost:8888/api/stockitems?page=${page}`)
                 .then((response) => {
                     this.stockItems = Object.assign({}, response.data);
                     this.stockItemsObject = Object.assign({}, this.stockItems);
@@ -255,14 +255,14 @@ export default {
         },
         getAllStockItems() {
             this.stockItems = null;
-            axios.get(`http://127.0.0.1:8080/api/stock_dropdown`)
+            axios.get(`http://localhost:8888/api/stock_dropdown`)
                 .then((response) => {
                     this.allStockItems = response.data;
                     this.tableId++;
                 });
         },
         getOrders() {
-            axios.get("http://127.0.0.1:8080/api/orders")
+            axios.get("http://localhost:8888/api/orders")
                 .then((response) => {
                     this.orders = Object.assign({}, response.data);
                     this.orders.data = this.orders.data.filter((order) =>
@@ -274,7 +274,7 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/stockitems/" + stockItem.id);
+            await axios.delete("http://localhost:8888/api/stockitems/" + stockItem.id);
             window.location.reload();
         },
         editStockItem(stockItem) {

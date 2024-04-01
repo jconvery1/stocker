@@ -265,7 +265,7 @@ export default {
     },
     methods: {
         getPermissions() {
-            axios.get("http://127.0.0.1:8080/api/permissions/")
+            axios.get("http://localhost:8888/api/permissions/")
                 .then((response) => {
                     this.permissions = response.data;
             });
@@ -273,7 +273,7 @@ export default {
         async savePermissions() {
             try {
                 const permissions = this.managerPermissions.concat(this.floorStaffPermissions);
-                await axios.post("http://127.0.0.1:8080/api/permissions", permissions)
+                await axios.post("http://localhost:8888/api/permissions", permissions)
                 await this.$router.push({path: '/settings'})
                 window.location.reload();
             } catch (error) {

@@ -158,14 +158,14 @@ export default {
     },
     methods: {
         getSuppliers(page = 1) {
-            axios.get(`http://127.0.0.1:8080/api/suppliers?page=${page}`)
+            axios.get(`http://localhost:8888/api/suppliers?page=${page}`)
                 .then((response) => {
                     this.suppliers = response.data;
                     this.tableId++;
                 });
         },
         getAllSuppliers() {
-            axios.get(`http://127.0.0.1:8080/api/supplier_dropdown`)
+            axios.get(`http://localhost:8888/api/supplier_dropdown`)
                 .then((response) => {
                     this.allSuppliers = response.data;
                     this.tableId++;
@@ -175,7 +175,7 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/suppliers/" + supplier.id);
+            await axios.delete("http://localhost:8888/api/suppliers/" + supplier.id);
             window.location.reload();
         },
         editSupplier(supplier) {

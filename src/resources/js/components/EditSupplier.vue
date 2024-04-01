@@ -130,14 +130,14 @@ export default {
     },
     methods: {
         getSupplier(id) {
-            axios.get("http://127.0.0.1:8080/api/suppliers/" + id)
+            axios.get("http://localhost:8888/api/suppliers/" + id)
                 .then((response) => {
                     this.supplier = response.data.data;
                 });
         },
         async editSupplier() {
             try {
-                await axios.put("http://127.0.0.1:8080/api/suppliers/" + this.id, this.supplier)
+                await axios.put("http://localhost:8888/api/suppliers/" + this.id, this.supplier)
                 await this.$router.push({path: '/suppliers'})
             } catch (error) {
                 if (error.response.status === 422) {

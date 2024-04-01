@@ -118,7 +118,7 @@ export default {
     },
     methods: {
         getBrands() {
-            axios.get("http://127.0.0.1:8080/api/dropdown_group/brand")
+            axios.get("http://localhost:8888/api/dropdown_group/brand")
                 .then((response) => {
                     this.brands = response.data;
                     this.tableId++;
@@ -128,13 +128,13 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/dropdowns/" + brand.id);
+            await axios.delete("http://localhost:8888/api/dropdowns/" + brand.id);
             this.brands = null;
             this.getBrands();
         },
         async addBrand(brand) {
             try {
-                await axios.post("http://127.0.0.1:8080/api/dropdowns", this.newBrand)
+                await axios.post("http://localhost:8888/api/dropdowns", this.newBrand)
                 this.newBrand = {
                     dropdown_group: 'brand',
                     value: null

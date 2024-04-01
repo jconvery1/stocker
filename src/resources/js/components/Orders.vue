@@ -179,13 +179,13 @@ export default {
     },
     methods: {
         getOrders(page = 1) {
-            axios.get(`http://127.0.0.1:8080/api/orders?page=${page}`)
+            axios.get(`http://localhost:8888/api/orders?page=${page}`)
                 .then((response) => {
                     this.orders = Object.assign({}, response.data);
                 });
         },
         getAllOrders() {
-            axios.get(`http://127.0.0.1:8080/api/order_dropdown`)
+            axios.get(`http://localhost:8888/api/order_dropdown`)
                 .then((response) => {
                     this.allOrders = response.data;
                 });
@@ -194,14 +194,14 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/orders/" + order.id);
+            await axios.delete("http://localhost:8888/api/orders/" + order.id);
             window.location.reload();
         },
         async fulfillOrder(order) {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.post("http://127.0.0.1:8080/api/orders/fulfill_order/" + order.id);
+            await axios.post("http://localhost:8888/api/orders/fulfill_order/" + order.id);
             this.orders = null;
             this.getOrders();
         },

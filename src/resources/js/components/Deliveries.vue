@@ -150,13 +150,13 @@ export default {
     },
     methods: {
         getDeliveries(page = 1) {
-            axios.get(`http://127.0.0.1:8080/api/deliveries?page=${page}`)
+            axios.get(`http://localhost:8888/api/deliveries?page=${page}`)
                 .then((response) => {
                     this.deliveries = response.data;
                 });
         },
         getAllDeliveries() {
-            axios.get(`http://127.0.0.1:8080/api/all_deliveries`)
+            axios.get(`http://localhost:8888/api/all_deliveries`)
                 .then((response) => {
                     this.allDeliveries = response.data;
                 });
@@ -165,7 +165,7 @@ export default {
             if (!window.confirm("Are You Sure?")) {
                 return;
             }
-            await axios.delete("http://127.0.0.1:8080/api/deliveries/" + delivery.id);
+            await axios.delete("http://localhost:8888/api/deliveries/" + delivery.id);
             window.location.reload();
         },
         editDelivery(delivery) {

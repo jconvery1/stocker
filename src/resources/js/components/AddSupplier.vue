@@ -117,7 +117,7 @@ export default {
     methods: {
         async addSupplier() {
             try {
-                await axios.post("http://127.0.0.1:8080/api/suppliers", this.supplier)
+                await axios.post("http://localhost:8888/api/suppliers", this.supplier)
                 await this.$router.push({path: '/suppliers'})
             } catch (error) {
                 if (error.response.status === 422) {

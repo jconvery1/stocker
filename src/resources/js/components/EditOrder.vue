@@ -178,7 +178,7 @@ export default {
     },
     methods: {
         getStockItems() {
-            axios.get("http://127.0.0.1:8080/api/stock_dropdown")
+            axios.get("http://localhost:8888/api/stock_dropdown")
                 .then((response) => {
                     this.stockItems = response.data;
                     if (this.order.length > 0) {
@@ -192,7 +192,7 @@ export default {
                 });
         },
         getOrder(id) {
-            axios.get("http://127.0.0.1:8080/api/orders/" + id)
+            axios.get("http://localhost:8888/api/orders/" + id)
                 .then((response) => {
                     this.order = response.data;
                     this.notes = this.order[0].notes;
@@ -212,7 +212,7 @@ export default {
                 stock_orders: this.order
             }
             try {
-                await axios.put("http://127.0.0.1:8080/api/orders/" + this.id, order)
+                await axios.put("http://localhost:8888/api/orders/" + this.id, order)
                 await this.$router.push({path: '/orders'})
             } catch (error) {
                 if (error.response.status === 422) {

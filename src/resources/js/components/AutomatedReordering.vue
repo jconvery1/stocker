@@ -111,7 +111,7 @@ export default {
     },
     methods: {
         getSettings() {
-            axios.get("http://127.0.0.1:8080/api/automation/1")
+            axios.get("http://localhost:8888/api/automation/1")
                 .then((response) => {
                     this.settings = response.data.data;
                     this.dataFetched = true;
@@ -119,7 +119,7 @@ export default {
         },
         async saveSettings() {
             try {
-                await axios.post("http://127.0.0.1:8080/api/automation", this.settings)
+                await axios.post("http://localhost:8888/api/automation", this.settings)
                 await this.$router.push({path: '/settings'})
             } catch (error) {
                 if (error.response.status === 422) {
