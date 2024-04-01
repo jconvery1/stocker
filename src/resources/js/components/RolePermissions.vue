@@ -268,7 +268,9 @@ export default {
             axios.get("http://localhost:8888/api/permissions/")
                 .then((response) => {
                     this.permissions = response.data;
-            });
+                }).catch((error) => {
+                    console.log(error);
+                });
         },
         async savePermissions() {
             try {
