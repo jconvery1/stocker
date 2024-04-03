@@ -2,6 +2,7 @@
   <img src="stocker.png" />
 </p>
 
+## Description
 This web application was developed as the final year project for my computer science degree, it was the first large coding project I completed independently and although it's far from perfect it was good enough to get me a first-class honours.
 
 Stocker is a comprehensive stock management system designed to streamline inventory control and order processing for a small shoe retailer.
