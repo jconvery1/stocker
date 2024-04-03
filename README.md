@@ -2,18 +2,18 @@
   <img src="stocker.png" />
 </p>
 
-## Description
+## 📝 Description
 This web application was developed as the final year project for my computer science degree, it was the first large coding project I completed independently and although it's far from perfect it was good enough to get me a first-class honours.
 
 Stocker is a comprehensive stock management system designed to streamline inventory control and order processing for a small shoe retailer.
 
-## Technologies Used
+## 👨‍💻 Technologies Used
 
 - **Docker**: The application is containerized using Docker, with three individual containers: Nginx (using the Nginx image), MySQL (using the MySQL image), and the project source code container. Docker offers benefits such as easy deployment, scalability, and consistency across different environments.
 - **Vue.js and Laravel**: The frontend is built using Vue.js, a progressive JavaScript framework, while the backend is powered by Laravel, a PHP web application framework. This combination provides a modern and efficient development environment for building robust web applications.
 - **Tailwind CSS**: The application's styling is implemented using Tailwind CSS, a utility-first CSS framework that allows for rapid UI development and customization.
 
-## Features
+## 📱 Features
 
 - **Stock Management**: Users can efficiently manage stock items, including tracking quantities, prices, suppliers, as well as facilitating order processing, sales tracking, and delivery management to streamline business operations. Suppliers can be managed within the system, allowing for easy communication and order placement.
 - **System Settings**: Users can configure various system settings to customize the application according to their business requirements.
@@ -21,7 +21,7 @@ Stocker is a comprehensive stock management system designed to streamline invent
 - **Automated Reordering**: When a stock item reaches a certain level, the system automatically reorders this item based on an amount configured by the user.
 - **Email Functionality**: An email is sent to the associated supplier when a stock item is reordered.
 
-## Getting Started
+## 🚀 Getting Started
 
 To get started with the application, follow these steps:
 
