@@ -1,4 +1,6 @@
-![Stocker Logo](stocker.png)
+<p align="center">
+  <img src="stocker.png" />
+</p>
 
 This web application was developed as the final year project for my computer science degree, it was the first large coding project I completed independently and although it's far from perfect it was good enough to get me a first-class honours.
 
