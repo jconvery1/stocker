@@ -33,6 +33,6 @@ To get started with the application, follow these steps:
 6. Run `php artisan migrate:fresh --seed` to migrate and seed the database.
 7. Change `DB_HOST` in your .env file to `mysql`.
 8. Access the application through your web browser (http://localhost:8888/sign-in).
-9. Create an account and sign in with your credentials or sign in with one of the existing accounts (usernames and passwords can be found in the users migration file).
+9. Create an account and sign in with your credentials or sign in with one of the demo accounts (usernames and passwords can be found in the users migration file).
 
 Note: 'composer install' may need ran in the project directory, this will import the packages and create the vendor folder.
